@@ -51,6 +51,8 @@ algorithm-lab/
 ├── algorithms/                  # Tested reference implementations
 │   └── sorting/bubble-sort/
 ├── components/                  # Shared platform components
+├── lib/lesson-schema.ts         # Validated definition shared by every lesson
+├── lib/lessons/                 # Data-driven lesson content
 ├── lib/algorithms.ts            # Central lesson and category registry
 ├── docs/LESSON_STANDARD.md      # Definition of a complete lesson
 └── tests/                       # Rendering and implementation tests

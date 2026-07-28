@@ -1,4 +1,4 @@
-import type { LessonMistake } from "../../lib/lesson-template";
+import type { LessonMistake } from "../../lib/lesson-schema";
 
 type LessonMistakesProps = {
   mistakes: readonly LessonMistake[];

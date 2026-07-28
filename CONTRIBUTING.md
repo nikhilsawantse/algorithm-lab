@@ -8,6 +8,7 @@ Thank you for helping make algorithm education freely available.
 2. Read [docs/LESSON_STANDARD.md](./docs/LESSON_STANDARD.md).
 3. Keep one pull request focused on one lesson or platform improvement.
 4. For a new lesson, propose its mental model, visualization, examples, and challenge before building the full page.
+5. Put lesson content in `lib/lessons/<lesson-slug>.ts` using the shared `defineLesson` schema.
 
 ## Local setup
 

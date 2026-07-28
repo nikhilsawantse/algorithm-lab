@@ -1,7 +1,10 @@
+import { bubbleSortLesson } from "./lessons/bubble-sort";
+import { supportedLanguages } from "./lesson-schema";
+import type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
+
 export type AlgorithmStatus = "complete" | "planned";
-export type AlgorithmDifficulty = "Beginner" | "Intermediate" | "Advanced";
-export const supportedLanguages = ["JavaScript", "Python", "Java", "C++"] as const;
-export type SupportedLanguage = (typeof supportedLanguages)[number];
+export { supportedLanguages } from "./lesson-schema";
+export type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
 
 export type AlgorithmLesson = {
   name: string;
@@ -27,15 +30,15 @@ export const categories = [
 
 export const algorithms: AlgorithmLesson[] = [
   {
-    name: "Bubble Sort",
-    slug: "bubble-sort",
-    category: "sorting",
-    difficulty: "Beginner",
-    description: "Compare adjacent values and watch the largest unsorted item rise into place.",
+    name: bubbleSortLesson.name,
+    slug: bubbleSortLesson.slug,
+    category: bubbleSortLesson.category,
+    difficulty: bubbleSortLesson.difficulty,
+    description: bubbleSortLesson.description,
     status: "complete",
     href: "/sorting/bubble-sort",
     languages: supportedLanguages,
-    complexity: "O(n²)",
+    complexity: bubbleSortLesson.complexity.average.value,
   },
   { name: "Selection Sort", slug: "selection-sort", category: "sorting", difficulty: "Beginner", description: "Repeatedly select the smallest remaining value.", status: "planned", languages: supportedLanguages },
   { name: "Insertion Sort", slug: "insertion-sort", category: "sorting", difficulty: "Beginner", description: "Grow a sorted region one carefully placed value at a time.", status: "planned", languages: supportedLanguages },

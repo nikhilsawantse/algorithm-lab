@@ -6,7 +6,7 @@ import { LessonFoundations } from "../../../components/lesson/LessonFoundations"
 import { LessonHeader } from "../../../components/lesson/LessonHeader";
 import { LessonMistakes } from "../../../components/lesson/LessonMistakes";
 import { LessonQuiz } from "../../../components/lesson/LessonQuiz";
-import { bubbleSortStudyGuide, lessonSectionOrder } from "../../../lib/lesson-template";
+import { bubbleSortLesson } from "../../../lib/lessons/bubble-sort";
 
 type SortStep = {
   values: number[];
@@ -21,148 +21,11 @@ type SortStep = {
 };
 
 const DEFAULT_VALUES = [72, 34, 91, 18, 56, 43, 27];
-const CHALLENGE_START = [7, 3, 5, 1, 6, 2, 4];
-const QUIZ_STORAGE_KEY = "algorithm-lab:bubble-sort:quiz";
+const CHALLENGE_START = [...bubbleSortLesson.challenge.startValues];
+const QUIZ_STORAGE_KEY = `algorithm-lab:${bubbleSortLesson.slug}:quiz`;
+const EXAMPLES = bubbleSortLesson.examples;
 
-const EXAMPLES = [
-  {
-    id: "sorted",
-    type: "Best case",
-    title: "Already sorted",
-    values: [1, 2, 3, 4, 5],
-    description: "One clean pass triggers the early exit.",
-    result: "1 pass | 4 comparisons | 0 swaps",
-  },
-  {
-    id: "reverse",
-    type: "Worst case",
-    title: "Reverse order",
-    values: [5, 4, 3, 2, 1],
-    description: "Every neighbor begins in the wrong order.",
-    result: "4 passes | 10 comparisons | 10 swaps",
-  },
-  {
-    id: "nearly",
-    type: "Practical case",
-    title: "Nearly sorted",
-    values: [1, 2, 4, 3, 5],
-    description: "A single misplaced pair is repaired quickly.",
-    result: "2 passes | 7 comparisons | 1 swap",
-  },
-  {
-    id: "duplicates",
-    type: "Stability case",
-    title: "Duplicate values",
-    values: [4, 2, 4, 1],
-    description: "Watch 4A remain before 4B after sorting.",
-    result: "3 passes | 6 comparisons | 4 swaps",
-  },
-] as const;
-
-const CODE_EXAMPLES = {
-  javascript: {
-    label: "JavaScript",
-    filename: "bubble-sort.mjs",
-    highlight: [7, 8, 9],
-    code: `function bubbleSort(numbers) {
-  const array = [...numbers];
-
-  for (let pass = 0; pass < array.length - 1; pass++) {
-    let swapped = false;
-
-    for (let i = 0; i < array.length - pass - 1; i++) {
-      if (array[i] > array[i + 1]) {
-        [array[i], array[i + 1]] = [array[i + 1], array[i]];
-        swapped = true;
-      }
-    }
-
-    if (!swapped) break;
-  }
-
-  return array;
-}`,
-  },
-  python: {
-    label: "Python",
-    filename: "bubble_sort.py",
-    highlight: [6, 7, 8],
-    code: `def bubble_sort(numbers):
-    array = numbers.copy()
-
-    for last in range(len(array) - 1, 0, -1):
-        swapped = False
-
-        for index in range(last):
-            if array[index] > array[index + 1]:
-                array[index], array[index + 1] = array[index + 1], array[index]
-                swapped = True
-
-        if not swapped:
-            break
-
-    return array`,
-  },
-  java: {
-    label: "Java",
-    filename: "BubbleSort.java",
-    highlight: [13, 14, 15, 16, 17, 18],
-    code: `import java.util.Arrays;
-
-public final class BubbleSort {
-    private BubbleSort() {
-    }
-
-    public static int[] bubbleSort(int[] numbers) {
-        int[] array = Arrays.copyOf(numbers, numbers.length);
-
-        for (int pass = 0; pass < array.length - 1; pass++) {
-            boolean swapped = false;
-
-            for (int i = 0; i < array.length - pass - 1; i++) {
-                if (array[i] > array[i + 1]) {
-                    int temporary = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temporary;
-                    swapped = true;
-                }
-            }
-
-            if (!swapped) break;
-        }
-
-        return array;
-    }
-}`,
-  },
-  cpp: {
-    label: "C++",
-    filename: "bubble_sort.cpp",
-    highlight: [10, 11, 12, 13, 14],
-    code: `#include <vector>
-
-std::vector<int> bubbleSort(const std::vector<int>& numbers) {
-    std::vector<int> array = numbers;
-
-    for (std::size_t pass = 0; pass + 1 < array.size(); ++pass) {
-        bool swapped = false;
-
-        for (std::size_t i = 0; i + pass + 1 < array.size(); ++i) {
-            if (array[i] > array[i + 1]) {
-                const int temporary = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temporary;
-                swapped = true;
-            }
-        }
-
-        if (!swapped) break;
-    }
-
-    return array;
-}`,
-  },
-} as const;
+const CODE_EXAMPLES = bubbleSortLesson.codeExamples;
 
 type CodeLanguage = keyof typeof CODE_EXAMPLES;
 
@@ -291,6 +154,7 @@ export default function Home() {
   const current = steps[Math.min(cursor, steps.length - 1)];
   const challengeWon = isSorted(challenge);
   const activeCode = CODE_EXAMPLES[codeLanguage];
+  const complexity = bubbleSortLesson.complexity;
   const traceRows = steps.slice(0, cursor + 1).map((step, index) => {
     const pair = step.comparing.length
       ? step.comparing.map((position) => step.labels[position]).join(" and ")
@@ -407,21 +271,19 @@ export default function Home() {
   return (
     <main>
       <a className="skip-link" href="#lesson-content">Skip to lesson content</a>
-      <LessonHeader lessonNumber={1} />
+      <LessonHeader lessonNumber={bubbleSortLesson.lessonNumber} />
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Sorting algorithms, made visible</p>
-          <h1>See every swap.<br /><em>Understand every pass.</em></h1>
-          <p className="hero-intro">
-            Bubble Sort repeatedly compares neighbors and moves the larger value right — like a bubble rising to the surface.
-          </p>
+          <p className="eyebrow"><span /> {bubbleSortLesson.hero.eyebrow}</p>
+          <h1>{bubbleSortLesson.hero.title}<br /><em>{bubbleSortLesson.hero.emphasis}</em></h1>
+          <p className="hero-intro">{bubbleSortLesson.hero.introduction}</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#visualizer">Start visualizing <span aria-hidden="true">↓</span></a>
             <a className="text-link" href="#learn">How it works <span aria-hidden="true">→</span></a>
           </div>
         </div>
-        <div className="hero-demo" aria-label="A small Bubble Sort example">
+        <div className="hero-demo" aria-label={`A small ${bubbleSortLesson.name} example`}>
           <div className="demo-caption"><span>Mini example</span><strong>[ 5, 2, 4 ]</strong></div>
           <div className="mini-flow">
             <div className="mini-row"><span className="mini-index">01</span><div className="mini-cells"><b className="active">5</b><b className="active">2</b><b>4</b></div><small>compare</small></div>
@@ -430,40 +292,40 @@ export default function Home() {
             <div className="flow-arrow" aria-hidden="true">↓</div>
             <div className="mini-row complete"><span className="mini-index">03</span><div className="mini-cells"><b>2</b><b>4</b><b>5</b></div><small>sorted</small></div>
           </div>
-          <p className="demo-note"><span>Key idea</span> After one full pass, the largest unsorted value reaches its final position.</p>
+          <p className="demo-note"><span>Key idea</span> {bubbleSortLesson.hero.keyIdea}</p>
         </div>
       </section>
 
       <LessonFoundations
-        objectives={bubbleSortStudyGuide.objectives}
-        prerequisites={bubbleSortStudyGuide.prerequisites}
-        sectionOrder={lessonSectionOrder}
+        objectives={bubbleSortLesson.studyGuide.objectives}
+        prerequisites={bubbleSortLesson.studyGuide.prerequisites}
+        sectionOrder={bubbleSortLesson.learningPath}
       />
 
       <section className="concept-section" id="learn">
         <div className="section-heading">
           <p className="section-number">01 — The idea</p>
-          <h2>How Bubble Sort thinks</h2>
-          <p>It only needs one question: “Are these two neighbors in the right order?”</p>
+          <h2>{bubbleSortLesson.mentalModel.title}</h2>
+          <p>{bubbleSortLesson.mentalModel.question}</p>
         </div>
         <div className="concept-grid">
           <article className="concept-card">
             <span className="concept-step">1</span>
             <div className="concept-visual"><b>7</b><i>vs</i><b>3</b></div>
-            <h3>Compare neighbors</h3>
-            <p>Start on the left and inspect two adjacent values.</p>
+            <h3>{bubbleSortLesson.mentalModel.steps[0].title}</h3>
+            <p>{bubbleSortLesson.mentalModel.steps[0].description}</p>
           </article>
           <article className="concept-card accent-card">
             <span className="concept-step">2</span>
             <div className="concept-visual"><b>3</b><span className="swap-arrow">⇄</span><b>7</b></div>
-            <h3>Swap when needed</h3>
-            <p>If the left value is larger, exchange their positions.</p>
+            <h3>{bubbleSortLesson.mentalModel.steps[1].title}</h3>
+            <p>{bubbleSortLesson.mentalModel.steps[1].description}</p>
           </article>
           <article className="concept-card">
             <span className="concept-step">3</span>
             <div className="concept-visual pass-visual"><b>3</b><b>5</b><b className="locked">7</b></div>
-            <h3>Repeat each pass</h3>
-            <p>Continue until a whole pass finishes with no swaps.</p>
+            <h3>{bubbleSortLesson.mentalModel.steps[2].title}</h3>
+            <p>{bubbleSortLesson.mentalModel.steps[2].description}</p>
           </article>
         </div>
       </section>
@@ -475,7 +337,7 @@ export default function Home() {
           <p>Use your own numbers, then play the sort or move through one decision at a time.</p>
         </div>
 
-        <div className="example-gallery" aria-label="Curated Bubble Sort examples">
+        <div className="example-gallery" aria-label={`Curated ${bubbleSortLesson.name} examples`}>
           {EXAMPLES.map((example) => (
             <button
               className={activeExample === example.id ? "example-card is-active" : "example-card"}
@@ -575,7 +437,7 @@ export default function Home() {
             </div>
             <div className="trace-table-wrap">
               <table className="trace-table">
-                <caption>{showFullTrace ? "Full Bubble Sort trace" : "The latest eight Bubble Sort decisions"}</caption>
+                <caption>{showFullTrace ? `Full ${bubbleSortLesson.name} trace` : `The latest eight ${bubbleSortLesson.name} decisions`}</caption>
                 <thead>
                   <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">Pair</th><th scope="col">Array after step</th><th scope="col">Swaps</th></tr>
                 </thead>
@@ -625,7 +487,7 @@ export default function Home() {
               <small>{activeCode.filename}</small>
               <button type="button" onClick={() => navigator.clipboard?.writeText(activeCode.code)}>Copy</button>
             </div>
-            <pre aria-label={`${activeCode.label} Bubble Sort implementation`}><code>
+            <pre aria-label={`${activeCode.label} ${bubbleSortLesson.name} implementation`}><code>
               {activeCode.code.split("\n").map((line, index) => (
                 <span className={activeCode.highlight.some((lineNumber) => lineNumber === index + 1) ? "line highlight-line" : "line"} key={`${codeLanguage}-${index}`}>
                   <i>{String(index + 1).padStart(2, "0")}</i><span>{line || " "}</span>
@@ -635,32 +497,34 @@ export default function Home() {
           </div>
           <aside className="complexity-panel">
             <h3>Complexity at a glance</h3>
-            <div className="complexity-row"><span>Best case <small>Already sorted</small></span><strong>O(n)</strong></div>
-            <div className="complexity-row"><span>Average case</span><strong>O(n²)</strong></div>
-            <div className="complexity-row"><span>Worst case <small>Reverse order</small></span><strong>O(n²)</strong></div>
-            <div className="complexity-row"><span>Extra space</span><strong>O(1)</strong></div>
-            <div className="stable-note"><span>✓</span><p><strong>Stable sort</strong><br />Equal values keep their original relative order.</p></div>
+            {[complexity.best, complexity.average, complexity.worst, complexity.space].map((complexityCase) => (
+              <div className="complexity-row" key={complexityCase.label}>
+                <span>{complexityCase.label}{complexityCase.context && <small>{complexityCase.context}</small>}</span>
+                <strong>{complexityCase.value}</strong>
+              </div>
+            ))}
+            <div className="stable-note"><span>✓</span><p><strong>{complexity.property.label}</strong><br />{complexity.property.description}</p></div>
             <div className="stability-proof" aria-label="Stability example">
               <small>Stability proof</small>
-              <div><span>4A</span><span>2</span><span>4B</span><span>1</span></div>
+              <div>{complexity.property.before.map((value, index) => <span key={`${value}-${index}`}>{value}</span>)}</div>
               <i aria-hidden="true">↓</i>
-              <div className="is-sorted"><span>1</span><span>2</span><span>4A</span><span>4B</span></div>
-              <p>The equal fours never cross, so A remains before B.</p>
+              <div className="is-sorted">{complexity.property.after.map((value, index) => <span key={`${value}-${index}`}>{value}</span>)}</div>
+              <p>{complexity.property.proof}</p>
             </div>
           </aside>
         </div>
       </section>
 
-      <LessonMistakes mistakes={bubbleSortStudyGuide.mistakes} />
+      <LessonMistakes mistakes={bubbleSortLesson.studyGuide.mistakes} />
 
-      <LessonQuiz questions={bubbleSortStudyGuide.quiz} storageKey={QUIZ_STORAGE_KEY} />
+      <LessonQuiz questions={bubbleSortLesson.studyGuide.quiz} storageKey={QUIZ_STORAGE_KEY} />
 
       <section className="challenge-section" id="challenge">
         <div className="challenge-copy">
           <p className="section-number">06 — Mini game</p>
-          <h2>Be the algorithm</h2>
-          <p>Sort the packages from smallest to largest. Just like Bubble Sort, you may only swap adjacent neighbors.</p>
-          <div className="game-rule"><span>Rule</span> Select one package, then select a neighbor to swap them.</div>
+          <h2>{bubbleSortLesson.challenge.title}</h2>
+          <p>{bubbleSortLesson.challenge.description}</p>
+          <div className="game-rule"><span>Rule</span> {bubbleSortLesson.challenge.rule}</div>
         </div>
         <div className="game-card">
           <div className="game-header"><span>{challengeWon ? "Challenge complete" : "Sort the conveyor"}</span><strong>{moves} moves</strong></div>
@@ -690,17 +554,21 @@ export default function Home() {
       <section className="use-cases">
         <div className="section-heading">
           <p className="section-number">07 — Use it wisely</p>
-          <h2>Where Bubble Sort fits</h2>
+          <h2>Where {bubbleSortLesson.name} fits</h2>
         </div>
         <div className="use-grid">
-          <article><span className="use-icon">◉</span><h3>Learning</h3><p>Its neighbor-by-neighbor logic makes sorting fundamentals easy to see and debug.</p><small>Great fit</small></article>
-          <article><span className="use-icon">≋</span><h3>Tiny datasets</h3><p>For a handful of values, clarity can matter more than performance.</p><small>Reasonable fit</small></article>
-          <article><span className="use-icon">↻</span><h3>Nearly sorted data</h3><p>With the early-exit flag, one clean pass can finish in linear time.</p><small>Good special case</small></article>
-          <article className="avoid"><span className="use-icon">×</span><h3>Large datasets</h3><p>Quadratic growth becomes expensive quickly. Prefer Merge Sort or Quick Sort.</p><small>Avoid</small></article>
+          {bubbleSortLesson.useCases.map((useCase) => (
+            <article className={useCase.avoid ? "avoid" : undefined} key={useCase.title}>
+              <span className="use-icon">{useCase.icon}</span>
+              <h3>{useCase.title}</h3>
+              <p>{useCase.description}</p>
+              <small>{useCase.recommendation}</small>
+            </article>
+          ))}
         </div>
       </section>
 
-      <LessonFooter lessonNumber={1} track="Sorting" />
+      <LessonFooter lessonNumber={bubbleSortLesson.lessonNumber} track={bubbleSortLesson.track} />
     </main>
   );
 }

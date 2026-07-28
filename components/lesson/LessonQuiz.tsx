@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { LessonQuizQuestion } from "../../lib/lesson-template";
+import type { LessonQuizQuestion } from "../../lib/lesson-schema";
 
 type QuizAnswers = Record<string, number>;
 

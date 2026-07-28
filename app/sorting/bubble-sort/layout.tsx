@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { bubbleSortLesson } from "../../../lib/lessons/bubble-sort";
 
 export const metadata: Metadata = {
-  title: "Bubble Sort — Interactive Lesson | Algorithm Lab",
-  description: "Learn Bubble Sort with a step-by-step visualizer, curated examples, tested JavaScript, Python, Java, and C++ code, and an adjacent-swap challenge.",
+  title: `${bubbleSortLesson.name} — Interactive Lesson | Algorithm Lab`,
+  description: bubbleSortLesson.metadataDescription,
 };
 
 export default function BubbleSortLayout({ children }: Readonly<{ children: React.ReactNode }>) {
