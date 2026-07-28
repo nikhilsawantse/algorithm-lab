@@ -16,10 +16,11 @@ type SortingTraceTableProps = {
   currentStep: number;
   rows: readonly SortingTraceRow[];
   pairColumnLabel?: string;
+  valuesColumnLabel?: string;
   operationColumnLabel?: string;
 };
 
-export function SortingTraceTable({ algorithmName, currentStep, rows, pairColumnLabel = "Pair", operationColumnLabel = "Swaps" }: SortingTraceTableProps) {
+export function SortingTraceTable({ algorithmName, currentStep, rows, pairColumnLabel = "Pair", valuesColumnLabel = "Array after step", operationColumnLabel = "Swaps" }: SortingTraceTableProps) {
   const [showFullTrace, setShowFullTrace] = useState(false);
   const visibleRows = showFullTrace ? rows : rows.slice(-8);
 
@@ -40,7 +41,7 @@ export function SortingTraceTable({ algorithmName, currentStep, rows, pairColumn
         <table className="trace-table">
           <caption>{showFullTrace ? `Full ${algorithmName} trace` : `The latest eight ${algorithmName} decisions`}</caption>
           <thead>
-            <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">{pairColumnLabel}</th><th scope="col">Array after step</th><th scope="col">{operationColumnLabel}</th></tr>
+            <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">{pairColumnLabel}</th><th scope="col">{valuesColumnLabel}</th><th scope="col">{operationColumnLabel}</th></tr>
           </thead>
           <tbody>
             {visibleRows.map((row) => (

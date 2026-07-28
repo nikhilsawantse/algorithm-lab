@@ -402,6 +402,37 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .insertion-slot.selected { background: #f7e8e3; border: 2px solid var(--red); color: var(--red); }
 .insertion-slot:disabled { opacity: .45; cursor: default; }
 .insertion-card { flex: 0 0 61px; background: var(--mint); border-color: #50a983; color: var(--green); }
+.merge-visual-stage { padding-bottom: 24px; }
+.merge-tree-scroll { overflow-x: auto; margin-top: 20px; padding-bottom: 8px; }
+.merge-tree { min-width: 760px; display: grid; gap: 10px; }
+.merge-tree-level { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 10px; }
+.merge-tree-level > small { color: #7d8981; font: 500 8px var(--font-mono); text-transform: uppercase; }
+.merge-tree-nodes { display: flex; justify-content: space-around; gap: 8px; }
+.merge-node { min-width: 48px; min-height: 38px; display: flex; align-items: center; justify-content: center; gap: 3px; padding: 6px; border: 1px solid #ced5ce; background: #f2f4ef; transition: transform .2s ease, background .2s ease; }
+.merge-node span { min-width: 25px; height: 25px; display: grid; place-items: center; background: white; border: 1px solid #d4dad3; font: 500 9px var(--font-mono); }
+.merge-node.is-base { border-style: dashed; }
+.merge-node.is-active { background: var(--lime); border-color: #9fb344; transform: translateY(-2px); box-shadow: 0 4px 0 rgba(23,37,31,.1); }
+.merge-node.is-done { background: #dff3e7; border-color: #68b28e; }
+.merge-workspace { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 10px; margin-top: 23px; }
+.merge-workspace article { min-height: 92px; padding: 12px; border: 1px solid #d5dbd4; background: #f7f8f4; }
+.merge-workspace article > small, .merge-challenge-output > small, .merge-queue > small { display: block; margin-bottom: 10px; color: #748079; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+.merge-workspace article.merge-output { background: #edf7f1; border-color: #a8cfba; }
+.merge-item-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.merge-item-row > span, .merge-challenge-output div > span { min-width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #c7d0c8; background: white; font: 500 10px var(--font-mono); }
+.merge-item-row > span.is-front { background: #b7cef4; border-color: #6f91c5; transform: translateY(-3px); }
+.merge-item-row > span.is-used { opacity: .3; text-decoration: line-through; }
+.merge-item-row > small { color: #9aa39d; font: 400 9px var(--font-mono); }
+.merge-game { overflow: hidden; }
+.merge-queues { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 28px 24px 18px; }
+.merge-queue { padding: 15px; border: 1px solid #d3d9d2; background: #f7f8f4; }
+.merge-queue.is-wrong { border: 2px solid var(--red); background: #f7e8e3; }
+.merge-queue > div { min-height: 76px; display: flex; gap: 5px; align-items: center; overflow-x: auto; }
+.merge-queue .package { flex: 0 0 54px; width: 54px; height: 68px; }
+.merge-queue .package:first-child:not(:disabled) { background: #b7cef4; border-color: #6f91c5; color: #29496f; }
+.merge-queue .package:disabled { opacity: .55; cursor: default; }
+.empty-queue { color: #929c95; font: 400 9px var(--font-mono); }
+.merge-challenge-output { padding: 0 24px 24px; }
+.merge-challenge-output > div { min-height: 48px; display: flex; flex-wrap: wrap; gap: 5px; padding: 7px; border: 1px dashed #8daa99; background: #edf7f1; }
 .package span { font: 500 19px var(--font-mono); }
 .package i { font-style: normal; opacity: .45; }
 .belt { height: 33px; background: #314039; display: flex; align-items: center; justify-content: space-around; padding: 0 25px; }
@@ -545,6 +576,8 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .stats-row .legend { grid-column: 1 / -1; justify-content: center; display: flex; margin-top: 16px; }
   .trace-panel { padding-left: 15px; padding-right: 15px; }
   .trace-heading { align-items: flex-start; flex-direction: column; }
+  .merge-workspace { grid-template-columns: 1fr; }
+  .merge-queues { grid-template-columns: 1fr; }
   .code-window { margin-right: 8px; }
   .quiz-question { padding: 20px 17px; }
   .conveyor { gap: 3px; padding-left: 8px; padding-right: 8px; }

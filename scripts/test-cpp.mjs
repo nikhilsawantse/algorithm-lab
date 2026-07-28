@@ -10,6 +10,7 @@ const suites = [
   { directory: "bubble-sort", source: "bubble_sort.cpp", test: "test_bubble_sort.cpp", executable: "bubble-sort-tests" },
   { directory: "selection-sort", source: "selection_sort.cpp", test: "test_selection_sort.cpp", executable: "selection-sort-tests" },
   { directory: "insertion-sort", source: "insertion_sort.cpp", test: "test_insertion_sort.cpp", executable: "insertion-sort-tests" },
+  { directory: "merge-sort", source: "merge_sort.cpp", test: "test_merge_sort.cpp", executable: "merge-sort-tests" },
 ];
 
 function run(command, arguments_) {

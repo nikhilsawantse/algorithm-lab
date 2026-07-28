@@ -11,6 +11,7 @@ There are no accounts, paid tiers, or locked lessons. The goal is to make high-q
 | Sorting | [Bubble Sort](./app/sorting/bubble-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 | Sorting | [Selection Sort](./app/sorting/selection-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 | Sorting | [Insertion Sort](./app/sorting/insertion-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
+| Sorting | [Merge Sort](./app/sorting/merge-sort/page.tsx) | Intermediate | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ## Learning method
 

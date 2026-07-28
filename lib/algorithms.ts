@@ -1,5 +1,6 @@
 import { bubbleSortLesson } from "./lessons/bubble-sort";
 import { insertionSortLesson } from "./lessons/insertion-sort";
+import { mergeSortLesson } from "./lessons/merge-sort";
 import { selectionSortLesson } from "./lessons/selection-sort";
 import { supportedLanguages } from "./lesson-schema";
 import type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
@@ -64,7 +65,17 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: insertionSortLesson.complexity.average.value,
   },
-  { name: "Merge Sort", slug: "merge-sort", category: "sorting", difficulty: "Intermediate", description: "Divide, sort, and merge smaller arrays.", status: "planned", languages: supportedLanguages },
+  {
+    name: mergeSortLesson.name,
+    slug: mergeSortLesson.slug,
+    category: mergeSortLesson.category,
+    difficulty: mergeSortLesson.difficulty,
+    description: mergeSortLesson.description,
+    status: "complete",
+    href: "/sorting/merge-sort",
+    languages: supportedLanguages,
+    complexity: mergeSortLesson.complexity.average.value,
+  },
   { name: "Quick Sort", slug: "quick-sort", category: "sorting", difficulty: "Intermediate", description: "Partition values around a pivot.", status: "planned", languages: supportedLanguages },
   { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
   { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: supportedLanguages },

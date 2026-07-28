@@ -10,6 +10,7 @@ const suites = [
   { directory: "bubble-sort", source: "BubbleSort.java", test: "BubbleSortTest.java", className: "BubbleSortTest" },
   { directory: "selection-sort", source: "SelectionSort.java", test: "SelectionSortTest.java", className: "SelectionSortTest" },
   { directory: "insertion-sort", source: "InsertionSort.java", test: "InsertionSortTest.java", className: "InsertionSortTest" },
+  { directory: "merge-sort", source: "MergeSort.java", test: "MergeSortTest.java", className: "MergeSortTest" },
 ];
 
 function run(command, arguments_) {

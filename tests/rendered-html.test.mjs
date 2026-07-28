@@ -26,6 +26,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Bubble Sort/);
   assert.match(html, /Selection Sort/);
   assert.match(html, /Insertion Sort/);
+  assert.match(html, /Merge Sort/);
   assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
@@ -106,6 +107,34 @@ test("server-renders the complete Insertion Sort lesson", async () => {
   assert.match(html, /Insert the next card/);
   assert.match(html, /Selection Sort/);
   assert.match(html, /Merge Sort/);
+  assert.match(html, /sorting\/merge-sort/);
+  assert.match(html, /Finish this lesson with confidence/);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+});
+
+test("server-renders the complete Merge Sort lesson", async () => {
+  const response = await render("/sorting/merge-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Split the problem/);
+  assert.match(html, /Watch the recursion tree resolve/);
+  assert.match(html, /Balanced recursion/);
+  assert.match(html, /Already sorted/);
+  assert.match(html, /Reverse order/);
+  assert.match(html, /Duplicate values/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Current fronts/);
+  assert.match(html, /Current output/);
+  assert.match(html, /Writes/);
+  assert.match(html, /Complexity at a glance/);
+  assert.match(html, /Stability proof/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
+  assert.match(html, /Merge two sorted queues/);
+  assert.match(html, /Insertion Sort/);
+  assert.match(html, /Quick Sort/);
   assert.match(html, /Coming next/);
   assert.match(html, /Finish this lesson with confidence/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
