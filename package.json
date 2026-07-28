@@ -1,5 +1,5 @@
 {
-  "name": "bubble-sort-visualizer",
+  "name": "algorithm-lab",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@11.9.0",
@@ -10,7 +10,8 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "vinext build && node --test tests/rendered-html.test.mjs",
+    "test": "vinext build && node --test tests/bubble-sort.test.mjs tests/rendered-html.test.mjs",
+    "test:python": "python algorithms/sorting/bubble-sort/test_bubble_sort.py",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {

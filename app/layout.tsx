@@ -18,21 +18,21 @@ export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const imageUrl = `${protocol}://${host}/og.png`;
-  const description = "An interactive Bubble Sort visualizer, JavaScript walkthrough, and adjacent-swap challenge.";
+  const imageUrl = `${protocol}://${host}/og-v2.png`;
+  const description = "Free interactive algorithm lessons with visualizations, tested code, guided examples, and challenges.";
 
   return {
-    title: "Bubble Lab — Learn Bubble Sort Visually",
+    title: "Algorithm Lab — Understand Algorithms Visually",
     description,
     openGraph: {
-      title: "Bubble Lab — Learn Bubble Sort Visually",
+      title: "Algorithm Lab — Understand Algorithms Visually",
       description,
       type: "website",
-      images: [{ url: imageUrl, width: 1536, height: 1024, alt: "Bubble Lab — see every swap and understand every pass" }],
+      images: [{ url: imageUrl, width: 1536, height: 1024, alt: "Algorithm Lab — free interactive algorithm lessons" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Bubble Lab — Learn Bubble Sort Visually",
+      title: "Algorithm Lab — Understand Algorithms Visually",
       description,
       images: [imageUrl],
     },

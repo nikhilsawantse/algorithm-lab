@@ -1,27 +1,55 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-async function render() {
+async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
 }
 
-test("server-renders the Bubble Lab lesson", async () => {
+test("server-renders the Algorithm Lab catalog", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Bubble Lab/);
+  assert.match(html, /<title>Algorithm Lab/);
+  assert.match(html, /Algorithms should be/);
+  assert.match(html, /Free for learners/);
+  assert.match(html, /Available lessons/);
+  assert.match(html, /Bubble Sort/);
+  assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("server-renders the complete Bubble Sort lesson", async () => {
+  const response = await render("/sorting/bubble-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
   assert.match(html, /See every swap/);
   assert.match(html, /Watch the algorithm work/);
+  assert.match(html, /Already sorted/);
+  assert.match(html, /Reverse order/);
+  assert.match(html, /Duplicate values/);
+  assert.match(html, /Python/);
+  assert.match(html, /Stability proof/);
   assert.match(html, /Be the algorithm/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("server-renders the foundations glossary", async () => {
+  const response = await render("/glossary");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /plain-language algorithm glossary/);
+  assert.match(html, /Big O notation/);
+  assert.match(html, /Stable sort/);
+  assert.match(html, /Memoization/);
 });

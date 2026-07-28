@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 /.pnpm-store/
+__pycache__/
+*.py[cod]
 /.pnp
 .pnp.*
 .yarn/*
