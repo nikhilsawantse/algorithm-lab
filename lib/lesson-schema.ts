@@ -98,6 +98,9 @@ export type AlgorithmLessonDefinition = {
     property: {
       label: string;
       description: string;
+      symbol: string;
+      tone: "positive" | "caution";
+      proofLabel: string;
       before: readonly string[];
       after: readonly string[];
       proof: string;
@@ -137,6 +140,7 @@ export function defineLesson<const T extends AlgorithmLessonDefinition>(lesson: 
   if (lesson.studyGuide.mistakes.length < 2) errors.push("at least two common mistakes are required");
   if (lesson.completionCriteria.length < 3) errors.push("at least three completion criteria are required");
   if (lesson.useCases.length < 2) errors.push("at least two use cases are required");
+  if (!["positive", "caution"].includes(lesson.complexity.property.tone)) errors.push("complexity property tone must be positive or caution");
 
   const duplicateExampleIds = duplicates(lesson.examples.map((example) => example.id));
   if (duplicateExampleIds.length) errors.push(`duplicate example ids: ${duplicateExampleIds.join(", ")}`);

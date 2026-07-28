@@ -334,6 +334,8 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .stable-note { display: flex; gap: 10px; margin-top: 16px; padding: 13px; background: #e8f5ed; }
 .stable-note > span { color: #31815e; }
 .stable-note p { margin: 0; font-size: 11px; line-height: 1.5; }
+.stable-note.is-caution { background: #f7e8e3; }
+.stable-note.is-caution > span { color: var(--red); }
 .stability-proof { margin-top: 15px; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; }
 .stability-proof > small { display: block; margin-bottom: 12px; color: #738079; font: 500 9px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; text-align: left; }
 .stability-proof > div { display: flex; justify-content: center; gap: 4px; }

@@ -12,7 +12,7 @@ The roadmap favors a strong learning sequence over a large but shallow list of p
 - [x] Bubble Sort interactive lesson
 - [x] Typed, data-driven lesson definitions
 - [x] Previous and next lesson navigation
-- [ ] Reusable visualizer control components
+- [x] Reusable visualizer control components
 - [x] Keyboard-driven lesson completion checklist
 
 ## Track 1 — Sorting

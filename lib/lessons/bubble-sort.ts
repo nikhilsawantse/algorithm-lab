@@ -241,6 +241,9 @@ std::vector<int> bubbleSort(const std::vector<int>& numbers) {
     property: {
       label: "Stable sort",
       description: "Equal values keep their original relative order.",
+      symbol: "✓",
+      tone: "positive",
+      proofLabel: "Stability proof",
       before: ["4A", "2", "4B", "1"],
       after: ["1", "2", "4A", "4B"],
       proof: "The equal fours never cross, so A remains before B.",

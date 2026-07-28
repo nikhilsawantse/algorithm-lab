@@ -42,6 +42,8 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /What you will learn/);
   assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
   assert.match(html, /Dry-run trace/);
+  assert.match(html, /Generate a random array/);
+  assert.match(html, /Complexity at a glance/);
   assert.match(html, /Common mistakes/);
   assert.match(html, /Check your understanding/);
   assert.match(html, /Be the algorithm/);

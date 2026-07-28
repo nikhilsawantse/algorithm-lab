@@ -43,6 +43,10 @@ test("Bubble Sort satisfies the standard lesson definition", async () => {
     const duplicateCompletion = structuredClone(lesson);
     duplicateCompletion.completionCriteria[1].id = duplicateCompletion.completionCriteria[0].id;
     assert.throws(() => schema.defineLesson(duplicateCompletion), /duplicate completion ids/);
+
+    const invalidPropertyTone = structuredClone(lesson);
+    invalidPropertyTone.complexity.property.tone = "unknown";
+    assert.throws(() => schema.defineLesson(invalidPropertyTone), /property tone/);
   } finally {
     await server.close();
   }

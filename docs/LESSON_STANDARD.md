@@ -6,6 +6,8 @@ This document defines when an Algorithm Lab lesson is complete.
 
 Every lesson stores its educational content in `lib/lessons/<lesson-slug>.ts` and creates it with `defineLesson` from `lib/lesson-schema.ts`. The route should contain only the algorithm-specific interaction and visual presentation.
 
+Use the shared lesson components for array input, playback, statistics, sorting traces, language tabs, complexity, quizzes, completion, and curriculum navigation. Create algorithm-specific UI only for the visualization and challenge mechanics.
+
 The schema requires and validates identity, metadata, hero copy, mental-model steps, objectives, prerequisites, curated examples, all four code implementations, complexity, mistakes, quiz answers, a challenge, and use cases. Invalid quiz indexes, duplicate identifiers, missing languages, and invalid highlighted code lines fail the build.
 
 ## Required learning sections

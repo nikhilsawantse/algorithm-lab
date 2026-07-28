@@ -1,6 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { ArrayInputControls } from "../../../components/lesson/ArrayInputControls";
+import { LessonCodeViewer } from "../../../components/lesson/LessonCodeViewer";
+import { LessonComplexityPanel } from "../../../components/lesson/LessonComplexityPanel";
 import { LessonFooter } from "../../../components/lesson/LessonFooter";
 import { LessonCompletion } from "../../../components/lesson/LessonCompletion";
 import { LessonFoundations } from "../../../components/lesson/LessonFoundations";
@@ -8,6 +11,9 @@ import { LessonHeader } from "../../../components/lesson/LessonHeader";
 import { LessonMistakes } from "../../../components/lesson/LessonMistakes";
 import { LessonNavigation } from "../../../components/lesson/LessonNavigation";
 import { LessonQuiz } from "../../../components/lesson/LessonQuiz";
+import { SortingTraceTable } from "../../../components/lesson/SortingTraceTable";
+import { VisualizerPlayback } from "../../../components/lesson/VisualizerPlayback";
+import { VisualizerStats } from "../../../components/lesson/VisualizerStats";
 import { bubbleSortLesson } from "../../../lib/lessons/bubble-sort";
 
 type SortStep = {
@@ -26,10 +32,7 @@ const DEFAULT_VALUES = [72, 34, 91, 18, 56, 43, 27];
 const CHALLENGE_START = [...bubbleSortLesson.challenge.startValues];
 const QUIZ_STORAGE_KEY = `algorithm-lab:${bubbleSortLesson.slug}:quiz`;
 const EXAMPLES = bubbleSortLesson.examples;
-
 const CODE_EXAMPLES = bubbleSortLesson.codeExamples;
-
-type CodeLanguage = keyof typeof CODE_EXAMPLES;
 
 function buildLabels(source: number[]) {
   const totals = new Map<number, number>();
@@ -146,17 +149,13 @@ export default function Home() {
   const [speed, setSpeed] = useState(650);
   const [inputError, setInputError] = useState("");
   const [activeExample, setActiveExample] = useState<string | null>(null);
-  const [codeLanguage, setCodeLanguage] = useState<CodeLanguage>("javascript");
   const [challenge, setChallenge] = useState(CHALLENGE_START);
   const [selected, setSelected] = useState<number | null>(null);
   const [moves, setMoves] = useState(0);
-  const [showFullTrace, setShowFullTrace] = useState(false);
 
   const steps = useMemo(() => buildSortSteps(source), [source]);
   const current = steps[Math.min(cursor, steps.length - 1)];
   const challengeWon = isSorted(challenge);
-  const activeCode = CODE_EXAMPLES[codeLanguage];
-  const complexity = bubbleSortLesson.complexity;
   const traceRows = steps.slice(0, cursor + 1).map((step, index) => {
     const pair = step.comparing.length
       ? step.comparing.map((position) => step.labels[position]).join(" and ")
@@ -173,9 +172,8 @@ export default function Home() {
             ? "Complete"
             : "Pass complete";
 
-    return { index, step, pair, action };
+    return { index, pass: step.pass, pair, action, values: step.labels, swaps: step.swaps };
   });
-  const visibleTraceRows = showFullTrace ? traceRows : traceRows.slice(-8);
 
   const nextStep = useCallback(() => {
     setCursor((position) => {
@@ -359,23 +357,14 @@ export default function Home() {
         </div>
 
         <div className="visualizer-shell">
-          <div className="input-row">
-            <label htmlFor="array-input">Your array</label>
-            <div className="input-group">
-              <input
-                id="array-input"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                onKeyDown={(event) => event.key === "Enter" && applyInput()}
-                aria-describedby={inputError ? "input-error" : "input-help"}
-              />
-              <button className="button button-apply" type="button" onClick={applyInput}>Apply</button>
-              <button className="icon-button" type="button" onClick={shuffleValues} aria-label="Generate a random array">↻</button>
-            </div>
-            <small id={inputError ? "input-error" : "input-help"} className={inputError ? "error-text" : "helper-text"}>
-              {inputError || "3–10 values, each from 1 to 99"}
-            </small>
-          </div>
+          <ArrayInputControls
+            input={input}
+            error={inputError}
+            helperText="3–10 values, each from 1 to 99"
+            onInputChange={setInput}
+            onApply={applyInput}
+            onShuffle={shuffleValues}
+          />
 
           <div className="visual-stage">
             <div className="stage-meta">
@@ -406,59 +395,29 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="playback">
-            <button className="play-button" type="button" onClick={() => cursor === steps.length - 1 ? resetVisualizer() : setPlaying((value) => !value)}>
-              <span aria-hidden="true">{cursor === steps.length - 1 ? "↺" : playing ? "Ⅱ" : "▶"}</span>
-              {cursor === steps.length - 1 ? "Replay" : playing ? "Pause" : "Play sort"}
-            </button>
-            <button className="step-button" type="button" onClick={nextStep} disabled={cursor === steps.length - 1}>Step →</button>
-            <div className="speed-control">
-              <label htmlFor="speed">Speed</label>
-              <input id="speed" type="range" min="180" max="1100" step="10" value={1280 - speed} onChange={(event) => setSpeed(1280 - Number(event.target.value))} />
-            </div>
-          </div>
-
-          <div className="progress-track" aria-label={`${progress}% complete`}><span style={{ width: `${progress}%` }} /></div>
-          <div className="stats-row">
-            <div><small>Comparisons</small><strong>{current.comparisons}</strong></div>
-            <div><small>Swaps</small><strong>{current.swaps}</strong></div>
-            <div><small>Progress</small><strong>{progress}%</strong></div>
-            <div className="legend"><span><i className="legend-compare" /> Comparing</span><span><i className="legend-sorted" /> Sorted</span></div>
-          </div>
-          <div className="trace-panel">
-            <div className="trace-heading">
-              <div>
-                <span className="foundation-label">Dry-run trace</span>
-                <h3>Turn each animation into a written decision</h3>
-              </div>
-              {traceRows.length > 8 && (
-                <button type="button" onClick={() => setShowFullTrace((visible) => !visible)} aria-expanded={showFullTrace}>
-                  {showFullTrace ? "Show latest 8" : `Show all ${traceRows.length}`}
-                </button>
-              )}
-            </div>
-            <div className="trace-table-wrap">
-              <table className="trace-table">
-                <caption>{showFullTrace ? `Full ${bubbleSortLesson.name} trace` : `The latest eight ${bubbleSortLesson.name} decisions`}</caption>
-                <thead>
-                  <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">Pair</th><th scope="col">Array after step</th><th scope="col">Swaps</th></tr>
-                </thead>
-                <tbody>
-                  {visibleTraceRows.map(({ index, step, pair, action }) => (
-                    <tr className={index === cursor ? "is-current" : ""} key={index}>
-                      <td>{index}</td>
-                      <td>{step.pass || "—"}</td>
-                      <td>{action}</td>
-                      <td>{pair}</td>
-                      <td><code>[{step.labels.join(", ")}]</code></td>
-                      <td>{step.swaps}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="trace-note">The highlighted row always matches the bars above. Step forward to extend the trace.</p>
-          </div>
+          <VisualizerPlayback
+            complete={cursor === steps.length - 1}
+            playing={playing}
+            delay={speed}
+            progress={progress}
+            onReplay={resetVisualizer}
+            onTogglePlaying={() => setPlaying((value) => !value)}
+            onStep={nextStep}
+            onDelayChange={setSpeed}
+            playLabel="Play sort"
+          />
+          <VisualizerStats
+            metrics={[
+              { label: "Comparisons", value: current.comparisons },
+              { label: "Swaps", value: current.swaps },
+              { label: "Progress", value: `${progress}%` },
+            ]}
+            legend={[
+              { label: "Comparing", className: "legend-compare" },
+              { label: "Sorted", className: "legend-sorted" },
+            ]}
+          />
+          <SortingTraceTable algorithmName={bubbleSortLesson.name} currentStep={cursor} rows={traceRows} />
         </div>
       </section>
 
@@ -469,51 +428,8 @@ export default function Home() {
           <p>Switch among JavaScript, Python, Java, and C++ to compare the same early-exit optimization.</p>
         </div>
         <div className="code-layout">
-          <div className="code-window">
-            <div className="code-language-tabs" role="tablist" aria-label="Code language">
-              {(Object.keys(CODE_EXAMPLES) as CodeLanguage[]).map((language) => (
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={codeLanguage === language}
-                  className={codeLanguage === language ? "is-active" : ""}
-                  key={language}
-                  onClick={() => setCodeLanguage(language)}
-                >
-                  {CODE_EXAMPLES[language].label}
-                </button>
-              ))}
-            </div>
-            <div className="code-toolbar">
-              <span><i /><i /><i /></span>
-              <small>{activeCode.filename}</small>
-              <button type="button" onClick={() => navigator.clipboard?.writeText(activeCode.code)}>Copy</button>
-            </div>
-            <pre aria-label={`${activeCode.label} ${bubbleSortLesson.name} implementation`}><code>
-              {activeCode.code.split("\n").map((line, index) => (
-                <span className={activeCode.highlight.some((lineNumber) => lineNumber === index + 1) ? "line highlight-line" : "line"} key={`${codeLanguage}-${index}`}>
-                  <i>{String(index + 1).padStart(2, "0")}</i><span>{line || " "}</span>
-                </span>
-              ))}
-            </code></pre>
-          </div>
-          <aside className="complexity-panel">
-            <h3>Complexity at a glance</h3>
-            {[complexity.best, complexity.average, complexity.worst, complexity.space].map((complexityCase) => (
-              <div className="complexity-row" key={complexityCase.label}>
-                <span>{complexityCase.label}{complexityCase.context && <small>{complexityCase.context}</small>}</span>
-                <strong>{complexityCase.value}</strong>
-              </div>
-            ))}
-            <div className="stable-note"><span>✓</span><p><strong>{complexity.property.label}</strong><br />{complexity.property.description}</p></div>
-            <div className="stability-proof" aria-label="Stability example">
-              <small>Stability proof</small>
-              <div>{complexity.property.before.map((value, index) => <span key={`${value}-${index}`}>{value}</span>)}</div>
-              <i aria-hidden="true">↓</i>
-              <div className="is-sorted">{complexity.property.after.map((value, index) => <span key={`${value}-${index}`}>{value}</span>)}</div>
-              <p>{complexity.property.proof}</p>
-            </div>
-          </aside>
+          <LessonCodeViewer algorithmName={bubbleSortLesson.name} codeExamples={CODE_EXAMPLES} />
+          <LessonComplexityPanel complexity={bubbleSortLesson.complexity} />
         </div>
       </section>
 
