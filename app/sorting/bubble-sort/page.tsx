@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { LessonFooter } from "../../../components/lesson/LessonFooter";
+import { LessonFoundations } from "../../../components/lesson/LessonFoundations";
+import { LessonHeader } from "../../../components/lesson/LessonHeader";
+import { LessonMistakes } from "../../../components/lesson/LessonMistakes";
+import { LessonQuiz } from "../../../components/lesson/LessonQuiz";
 import { bubbleSortStudyGuide, lessonSectionOrder } from "../../../lib/lesson-template";
-import { sitePath } from "../../../lib/site-path";
 
 type SortStep = {
   values: number[];
@@ -19,8 +23,6 @@ type SortStep = {
 const DEFAULT_VALUES = [72, 34, 91, 18, 56, 43, 27];
 const CHALLENGE_START = [7, 3, 5, 1, 6, 2, 4];
 const QUIZ_STORAGE_KEY = "algorithm-lab:bubble-sort:quiz";
-
-type QuizAnswers = Record<string, number>;
 
 const EXAMPLES = [
   {
@@ -225,9 +227,6 @@ export default function Home() {
   const [selected, setSelected] = useState<number | null>(null);
   const [moves, setMoves] = useState(0);
   const [showFullTrace, setShowFullTrace] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>({});
-  const [quizChecked, setQuizChecked] = useState(false);
-  const [quizLoaded, setQuizLoaded] = useState(false);
 
   const steps = useMemo(() => buildSortSteps(source), [source]);
   const current = steps[Math.min(cursor, steps.length - 1)];
@@ -252,9 +251,6 @@ export default function Home() {
     return { index, step, pair, action };
   });
   const visibleTraceRows = showFullTrace ? traceRows : traceRows.slice(-8);
-  const answeredQuizQuestions = bubbleSortStudyGuide.quiz.filter((question) => quizAnswers[question.id] !== undefined).length;
-  const quizComplete = answeredQuizQuestions === bubbleSortStudyGuide.quiz.length;
-  const quizScore = bubbleSortStudyGuide.quiz.filter((question) => quizAnswers[question.id] === question.correctOption).length;
 
   const nextStep = useCallback(() => {
     setCursor((position) => {
@@ -271,34 +267,6 @@ export default function Home() {
     const timer = window.setInterval(nextStep, speed);
     return () => window.clearInterval(timer);
   }, [nextStep, playing, speed]);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      try {
-        const storedQuiz = window.localStorage.getItem(QUIZ_STORAGE_KEY);
-        if (storedQuiz) {
-          const parsed = JSON.parse(storedQuiz) as { answers?: QuizAnswers; checked?: boolean };
-          if (parsed.answers) setQuizAnswers(parsed.answers);
-          if (parsed.checked) setQuizChecked(true);
-        }
-      } catch {
-        // Storage can be unavailable in private or restricted browser contexts.
-      } finally {
-        setQuizLoaded(true);
-      }
-    }, 0);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!quizLoaded) return;
-    try {
-      window.localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ answers: quizAnswers, checked: quizChecked }));
-    } catch {
-      // The quiz still works for the current session when persistence is blocked.
-    }
-  }, [quizAnswers, quizChecked, quizLoaded]);
 
   function applyInput() {
     const parsed = input
@@ -343,16 +311,6 @@ export default function Home() {
     setPlaying(false);
   }
 
-  function answerQuizQuestion(questionId: string, optionIndex: number) {
-    setQuizAnswers((answers) => ({ ...answers, [questionId]: optionIndex }));
-    setQuizChecked(false);
-  }
-
-  function resetQuiz() {
-    setQuizAnswers({});
-    setQuizChecked(false);
-  }
-
   function chooseChallengeTile(index: number) {
     if (challengeWon) return;
     if (selected === null) {
@@ -390,20 +348,7 @@ export default function Home() {
   return (
     <main>
       <a className="skip-link" href="#lesson-content">Skip to lesson content</a>
-      <header className="site-header">
-        <a className="brand" href={sitePath("/")} aria-label="Algorithm Lab home">
-          <span className="brand-mark">A</span>
-          <span>Algorithm Lab</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href={sitePath("/")}>Explore</a>
-          <a href="#learn">Learn</a>
-          <a href="#visualizer">Visualizer</a>
-          <a href="#quiz">Quiz</a>
-          <a href="#challenge">Challenge</a>
-        </nav>
-        <span className="lesson-pill">Lesson 01</span>
-      </header>
+      <LessonHeader lessonNumber={1} />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -430,33 +375,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="lesson-foundations" id="lesson-content" aria-labelledby="lesson-foundations-title">
-        <div className="lesson-foundations-heading">
-          <p className="section-number">Before you start</p>
-          <h2 id="lesson-foundations-title">What you will learn</h2>
-          <p>A clear finish line for the lesson, plus the small amount of knowledge you need before beginning.</p>
-        </div>
-        <div className="lesson-foundations-grid">
-          <article>
-            <span className="foundation-label">Learning objectives</span>
-            <ol>
-              {bubbleSortStudyGuide.objectives.map((objective) => <li key={objective}>{objective}</li>)}
-            </ol>
-          </article>
-          <article>
-            <span className="foundation-label">Prerequisites</span>
-            <ul>
-              {bubbleSortStudyGuide.prerequisites.map((prerequisite) => <li key={prerequisite}>{prerequisite}</li>)}
-            </ul>
-            <a href={sitePath("/glossary")}>Review the foundations glossary →</a>
-          </article>
-        </div>
-        <div className="lesson-path" aria-label="Lesson learning path">
-          {lessonSectionOrder.map((section, index) => (
-            <span key={section}><i>{String(index + 1).padStart(2, "0")}</i>{section}</span>
-          ))}
-        </div>
-      </section>
+      <LessonFoundations
+        objectives={bubbleSortStudyGuide.objectives}
+        prerequisites={bubbleSortStudyGuide.prerequisites}
+        sectionOrder={lessonSectionOrder}
+      />
 
       <section className="concept-section" id="learn">
         <div className="section-heading">
@@ -669,77 +592,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mistakes-section" aria-labelledby="mistakes-title">
-        <div className="section-heading">
-          <p className="section-number">04 — Avoid the traps</p>
-          <h2 id="mistakes-title">Common mistakes</h2>
-          <p>These bugs often produce an answer that looks almost right. Learn the symptom and the correction together.</p>
-        </div>
-        <div className="mistakes-grid">
-          {bubbleSortStudyGuide.mistakes.map((mistake, index) => (
-            <article key={mistake.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{mistake.title}</h3>
-              <p><strong>Symptom:</strong> {mistake.symptom}</p>
-              <p><strong>Correction:</strong> {mistake.correction}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <LessonMistakes mistakes={bubbleSortStudyGuide.mistakes} />
 
-      <section className="quiz-section" id="quiz" aria-labelledby="quiz-title">
-        <div className="quiz-intro">
-          <p className="section-number">05 — Check yourself</p>
-          <h2 id="quiz-title">Check your understanding</h2>
-          <p>Answer four questions, then reveal the reasoning. Your progress stays on this device—no account required.</p>
-          <div className="quiz-progress" aria-label={`${answeredQuizQuestions} of ${bubbleSortStudyGuide.quiz.length} questions answered`}>
-            <span style={{ width: `${(answeredQuizQuestions / bubbleSortStudyGuide.quiz.length) * 100}%` }} />
-          </div>
-          <small>{answeredQuizQuestions} of {bubbleSortStudyGuide.quiz.length} answered</small>
-        </div>
-        <div className="quiz-questions">
-          {bubbleSortStudyGuide.quiz.map((question, questionIndex) => {
-            const selectedAnswer = quizAnswers[question.id];
-            const isCorrect = selectedAnswer === question.correctOption;
-
-            return (
-              <fieldset className="quiz-question" key={question.id}>
-                <legend><span>Q{questionIndex + 1}</span>{question.prompt}</legend>
-                <div className="quiz-options">
-                  {question.options.map((option, optionIndex) => {
-                    const selected = selectedAnswer === optionIndex;
-                    const optionState = quizChecked && selected ? (isCorrect ? " is-correct" : " is-incorrect") : "";
-                    return (
-                      <label className={`quiz-option${selected ? " is-selected" : ""}${optionState}`} key={option}>
-                        <input
-                          type="radio"
-                          name={question.id}
-                          value={optionIndex}
-                          checked={selected}
-                          onChange={() => answerQuizQuestion(question.id, optionIndex)}
-                        />
-                        <span>{option}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-                {quizChecked && (
-                  <p className={isCorrect ? "quiz-explanation is-correct" : "quiz-explanation is-incorrect"}>
-                    <strong>{isCorrect ? "Correct." : `Not quite. The answer is ${question.options[question.correctOption]}.`}</strong> {question.explanation}
-                  </p>
-                )}
-              </fieldset>
-            );
-          })}
-          <div className="quiz-actions">
-            <button className="button button-primary" type="button" disabled={!quizComplete} onClick={() => setQuizChecked(true)}>Check answers</button>
-            <button type="button" onClick={resetQuiz}>Reset quiz</button>
-            <p aria-live="polite">
-              {quizChecked ? `Score: ${quizScore} of ${bubbleSortStudyGuide.quiz.length}. ${quizScore === bubbleSortStudyGuide.quiz.length ? "You are ready for the challenge." : "Review the explanations and try again."}` : quizComplete ? "All questions answered. Check your work when ready." : "Answer every question to check your work."}
-            </p>
-          </div>
-        </div>
-      </section>
+      <LessonQuiz questions={bubbleSortStudyGuide.quiz} storageKey={QUIZ_STORAGE_KEY} />
 
       <section className="challenge-section" id="challenge">
         <div className="challenge-copy">
@@ -786,11 +641,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
-        <div><span className="brand-mark">A</span><p><strong>Algorithm Lab</strong><br /><small>Interactive algorithms, free for everyone.</small></p></div>
-        <p>Lesson 01 of the Sorting track</p>
-        <a href="#top">Back to top ↑</a>
-      </footer>
+      <LessonFooter lessonNumber={1} track="Sorting" />
     </main>
   );
 }
