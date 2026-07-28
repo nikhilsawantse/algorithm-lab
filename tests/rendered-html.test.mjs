@@ -48,6 +48,9 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /Continue learning/);
   assert.match(html, /Selection Sort/);
   assert.match(html, /Coming next/);
+  assert.match(html, /Finish this lesson with confidence/);
+  assert.match(html, /Progress stays only in this browser/);
+  assert.match(html, /Mark lesson complete/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
 });
 

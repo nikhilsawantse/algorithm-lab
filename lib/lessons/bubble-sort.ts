@@ -252,6 +252,12 @@ std::vector<int> bubbleSort(const std::vector<int>& numbers) {
     rule: "Select one package, then select a neighbor to swap them.",
     startValues: [7, 3, 5, 1, 6, 2, 4],
   },
+  completionCriteria: [
+    { id: "explain", label: "Explain the idea", description: "I can explain why one value reaches its final position after each pass." },
+    { id: "trace", label: "Trace the steps", description: "I followed the visualizer or dry-run table through at least one complete example." },
+    { id: "implement", label: "Read an implementation", description: "I compared the early-exit logic in at least one of the four supported languages." },
+    { id: "practice", label: "Practice the mechanics", description: "I completed the knowledge check and tried the adjacent-swap challenge." },
+  ],
   useCases: [
     { icon: "◉", title: "Learning", description: "Its neighbor-by-neighbor logic makes sorting fundamentals easy to see and debug.", recommendation: "Great fit" },
     { icon: "≋", title: "Tiny datasets", description: "For a handful of values, clarity can matter more than performance.", recommendation: "Reasonable fit" },

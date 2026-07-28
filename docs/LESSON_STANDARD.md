@@ -24,6 +24,7 @@ Every lesson must include:
 10. Relevant properties such as stability, in-place operation, completeness, or optimality
 11. Practical use cases and clear limitations
 12. A challenge, game, or knowledge check connected to the algorithm's mechanics
+13. A device-local completion checklist with at least three measurable learning criteria
 
 ## Correctness requirements
 

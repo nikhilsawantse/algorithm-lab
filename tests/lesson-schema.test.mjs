@@ -32,12 +32,17 @@ test("Bubble Sort satisfies the standard lesson definition", async () => {
     )));
     assert.equal(lesson.learningPath.length, 8);
     assert.equal(lesson.studyGuide.quiz.length, 4);
+    assert.equal(lesson.completionCriteria.length, 4);
     assert.ok(lesson.examples.length >= 3);
     assert.ok(lesson.useCases.some((useCase) => useCase.avoid));
 
     const invalidLesson = structuredClone(lesson);
     invalidLesson.studyGuide.quiz[0].correctOption = 99;
     assert.throws(() => schema.defineLesson(invalidLesson), /invalid correctOption/);
+
+    const duplicateCompletion = structuredClone(lesson);
+    duplicateCompletion.completionCriteria[1].id = duplicateCompletion.completionCriteria[0].id;
+    assert.throws(() => schema.defineLesson(duplicateCompletion), /duplicate completion ids/);
   } finally {
     await server.close();
   }

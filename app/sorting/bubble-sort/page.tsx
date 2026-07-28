@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { LessonFooter } from "../../../components/lesson/LessonFooter";
+import { LessonCompletion } from "../../../components/lesson/LessonCompletion";
 import { LessonFoundations } from "../../../components/lesson/LessonFoundations";
 import { LessonHeader } from "../../../components/lesson/LessonHeader";
 import { LessonMistakes } from "../../../components/lesson/LessonMistakes";
@@ -568,6 +569,12 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <LessonCompletion
+        lessonName={bubbleSortLesson.name}
+        slug={bubbleSortLesson.slug}
+        criteria={bubbleSortLesson.completionCriteria}
+      />
 
       <LessonNavigation currentSlug={bubbleSortLesson.slug} />
 

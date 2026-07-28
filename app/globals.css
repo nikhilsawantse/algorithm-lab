@@ -405,6 +405,32 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .use-grid article.avoid { background: #f5ebe6; }
 .use-grid article.avoid .use-icon, .use-grid article.avoid small { color: var(--red); }
 
+.lesson-completion { padding: 100px max(20px, calc((100vw - 1180px) / 2)); background: var(--green); color: white; }
+.lesson-completion-inner { width: min(1180px, 100%); margin: 0 auto; display: grid; grid-template-columns: .72fr 1.28fr; gap: 78px; align-items: start; }
+.completion-intro .section-number { color: var(--mint-strong); }
+.completion-intro h2 { margin: 0; font-size: clamp(35px, 4vw, 49px); line-height: 1.08; letter-spacing: -.055em; }
+.completion-intro > p:last-of-type { color: #bdccc5; font-size: 14px; line-height: 1.7; }
+.completion-meter { height: 6px; margin-top: 28px; background: #36594c; }
+.completion-meter span { display: block; height: 100%; background: var(--lime); transition: width .25s ease; }
+.completion-meter-label { display: flex; justify-content: space-between; margin-top: 10px; color: #aebfb7; font: 500 9px var(--font-mono); text-transform: uppercase; }
+.completion-meter-label strong { color: var(--lime); font-size: 11px; }
+.completion-checklist { padding: 12px 26px 25px; background: #fbfcf8; color: var(--ink); box-shadow: 14px 16px 0 rgba(0,0,0,.14); }
+.completion-criterion { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.completion-criterion input { width: 19px; height: 19px; flex: none; margin: 2px 0 0; accent-color: var(--green); }
+.completion-criterion input:disabled { cursor: not-allowed; }
+.completion-criterion > span { display: flex; flex-direction: column; gap: 5px; }
+.completion-criterion strong { font-size: 14px; }
+.completion-criterion small { color: var(--ink-soft); font-size: 11px; line-height: 1.55; }
+.completion-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; padding-top: 23px; }
+.completion-actions .button:disabled { opacity: .42; box-shadow: none; }
+.completion-actions > p:not(.completion-success) { flex-basis: 100%; margin: 0; color: var(--ink-soft); font-size: 11px; }
+.completion-actions > button:not(.button) { margin-left: auto; border: 0; border-bottom: 1px solid var(--ink); background: transparent; padding: 5px 0; font-size: 11px; font-weight: 750; }
+.completion-success { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 1px 11px; margin: 0; }
+.completion-success > span { grid-row: 1 / 3; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #dff3e7; color: #26704e; font-weight: 850; }
+.completion-success strong { color: #246448; font-size: 14px; }
+.completion-success small { color: #75827b; font: 400 9px var(--font-mono); }
+.lesson-completion.is-complete .completion-meter span { background: var(--mint-strong); }
+
 .lesson-navigation { padding: 90px max(20px, calc((100vw - 1180px) / 2)); background: #e5eee6; border-top: 1px solid #cdd9cf; }
 .lesson-navigation-inner { width: min(1180px, 100%); margin: 0 auto; }
 .lesson-navigation-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 45px; margin-bottom: 36px; }
@@ -446,6 +472,7 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .quiz-intro { position: static; }
   .challenge-section { grid-template-columns: 1fr; gap: 45px; }
   .use-grid { grid-template-columns: repeat(2, 1fr); }
+  .lesson-completion-inner { grid-template-columns: 1fr; gap: 42px; }
   .lesson-navigation-heading { align-items: flex-start; flex-direction: column; gap: 15px; }
   .lesson-navigation-heading > p { text-align: left; }
 }
@@ -505,6 +532,10 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .conveyor { gap: 3px; padding-left: 8px; padding-right: 8px; }
   .package { width: 43px; height: 64px; }
   .use-grid { grid-template-columns: 1fr; }
+  .lesson-completion { padding-top: 75px; padding-bottom: 75px; }
+  .completion-checklist { padding-left: 18px; padding-right: 18px; box-shadow: 8px 10px 0 rgba(0,0,0,.14); }
+  .completion-actions { align-items: flex-start; flex-direction: column; }
+  .completion-actions > button:not(.button) { margin-left: 0; }
   .lesson-navigation { padding-top: 70px; padding-bottom: 70px; }
   .lesson-navigation-grid { grid-template-columns: 1fr; }
   .lesson-nav-card, .lesson-nav-card.is-next { min-height: 195px; align-items: flex-start; text-align: left; }

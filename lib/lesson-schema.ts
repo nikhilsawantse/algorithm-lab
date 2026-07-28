@@ -56,6 +56,12 @@ export type LessonUseCase = {
   avoid?: boolean;
 };
 
+export type LessonCompletionCriterion = {
+  id: string;
+  label: string;
+  description: string;
+};
+
 export type AlgorithmLessonDefinition = {
   slug: string;
   name: string;
@@ -103,6 +109,7 @@ export type AlgorithmLessonDefinition = {
     rule: string;
     startValues: readonly number[];
   };
+  completionCriteria: readonly LessonCompletionCriterion[];
   useCases: readonly LessonUseCase[];
 };
 
@@ -128,6 +135,7 @@ export function defineLesson<const T extends AlgorithmLessonDefinition>(lesson: 
   if (lesson.examples.length < 3) errors.push("at least three curated examples are required");
   if (lesson.studyGuide.quiz.length < 3) errors.push("at least three quiz questions are required");
   if (lesson.studyGuide.mistakes.length < 2) errors.push("at least two common mistakes are required");
+  if (lesson.completionCriteria.length < 3) errors.push("at least three completion criteria are required");
   if (lesson.useCases.length < 2) errors.push("at least two use cases are required");
 
   const duplicateExampleIds = duplicates(lesson.examples.map((example) => example.id));
@@ -135,6 +143,9 @@ export function defineLesson<const T extends AlgorithmLessonDefinition>(lesson: 
 
   const duplicateQuizIds = duplicates(lesson.studyGuide.quiz.map((question) => question.id));
   if (duplicateQuizIds.length) errors.push(`duplicate quiz ids: ${duplicateQuizIds.join(", ")}`);
+
+  const duplicateCompletionIds = duplicates(lesson.completionCriteria.map((criterion) => criterion.id));
+  if (duplicateCompletionIds.length) errors.push(`duplicate completion ids: ${duplicateCompletionIds.join(", ")}`);
 
   for (const question of lesson.studyGuide.quiz) {
     if (question.options.length < 2) errors.push(`quiz ${question.id} needs at least two options`);
