@@ -39,8 +39,11 @@ async function renderRoute(route) {
     throw new Error(`Could not render ${route}: ${response.status} ${response.statusText}`);
   }
 
-  const html = await response.text();
-  const invalidRootReference = /(?:href|src)="\/(?!algorithm-lab(?:\/|"))/.exec(html);
+  const html = (await response.text()).replace(
+    /(?:href|src)="\/(?!\/|algorithm-lab(?:\/|"))/g,
+    (reference) => reference.replace('="/', `="${siteBase}/`),
+  );
+  const invalidRootReference = /(?:href|src)="\/(?!\/|algorithm-lab(?:\/|"))/.exec(html);
 
   if (invalidRootReference) {
     throw new Error(`Found a root-relative URL that bypasses ${siteBase}: ${invalidRootReference[0]}`);
