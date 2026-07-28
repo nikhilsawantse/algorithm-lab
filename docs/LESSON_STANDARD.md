@@ -12,7 +12,7 @@ Every lesson must include:
 4. An interactive, keyboard-accessible visualization
 5. Step, play, pause, reset, and speed controls where motion is involved
 6. Curated best, average, worst, and edge-case examples when applicable
-7. Tested JavaScript and Python reference implementations
+7. Tested JavaScript, Python, Java, and C++ reference implementations
 8. Best, average, and worst time complexity
 9. Extra-space complexity
 10. Relevant properties such as stability, in-place operation, completeness, or optimality
@@ -46,4 +46,4 @@ Every lesson must include:
 
 ## Definition of done
 
-A lesson is complete only after its production build, route-rendering test, JavaScript tests, Python tests, responsive layout, and accessibility checklist all pass.
+A lesson is complete only after its production build, route-rendering test, JavaScript, Python, Java, and C++ tests, responsive layout, and accessibility checklist all pass.

@@ -6,9 +6,9 @@ There are no accounts, paid tiers, or locked lessons. The goal is to make high-q
 
 ## Available lessons
 
-| Category | Lesson | Level | JavaScript | Python | Visualizer | Challenge |
-| --- | --- | --- | --- | --- | --- | --- |
-| Sorting | [Bubble Sort](./app/sorting/bubble-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes |
+| Category | Lesson | Level | JavaScript | Python | Java | C++ | Visualizer | Challenge |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Sorting | [Bubble Sort](./app/sorting/bubble-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ## Learning method
 
@@ -16,14 +16,14 @@ Every complete lesson follows four connected steps:
 
 1. **Understand** — build a plain-language mental model.
 2. **Visualize** — inspect every important state change.
-3. **Implement** — compare tested JavaScript and Python code.
+3. **Implement** — compare tested JavaScript, Python, Java, and C++ code.
 4. **Practice** — use examples, games, and challenges.
 
 Each lesson also documents complexity, edge cases, practical use cases, limitations, and relevant properties such as stability or in-place operation.
 
 ## Run locally
 
-You need Node.js 22.13 or newer and pnpm.
+You need Node.js 22.13 or newer and pnpm. Running every language test also requires Python 3, a JDK, and a C++17 compiler.
 
 ```bash
 pnpm install
@@ -38,6 +38,8 @@ Open [http://localhost:3000](http://localhost:3000).
 pnpm build
 pnpm test
 pnpm test:python
+pnpm test:java
+pnpm test:cpp
 ```
 
 ## Repository structure

@@ -22,12 +22,14 @@ pnpm dev
 pnpm build
 pnpm test
 pnpm test:python
+pnpm test:java
+pnpm test:cpp
 ```
 
 ## Contribution checklist
 
 - [ ] Explanations are original, accurate, and written in plain language.
-- [ ] JavaScript and Python implementations agree.
+- [ ] JavaScript, Python, Java, and C++ implementations agree.
 - [ ] Edge cases and deterministic random inputs are tested.
 - [ ] The visualization works with keyboard and touch input.
 - [ ] State is communicated with labels or shapes as well as color.

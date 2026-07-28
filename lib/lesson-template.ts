@@ -34,7 +34,7 @@ export const bubbleSortStudyGuide: LessonStudyGuide = {
   objectives: [
     "Explain why each pass places one value in its final position.",
     "Trace comparisons and swaps without running the code.",
-    "Implement the optimized algorithm in JavaScript or Python.",
+    "Implement the optimized algorithm in JavaScript, Python, Java, or C++.",
     "Recognize when Bubble Sort is stable, useful, or too slow.",
   ],
   prerequisites: [

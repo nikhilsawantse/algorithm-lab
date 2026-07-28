@@ -13,6 +13,8 @@
     "start": "vinext start",
     "test": "vinext build && node --test tests/bubble-sort.test.mjs tests/encoding.test.mjs tests/rendered-html.test.mjs",
     "test:python": "python algorithms/sorting/bubble-sort/test_bubble_sort.py",
+    "test:java": "node scripts/test-java.mjs",
+    "test:cpp": "node scripts/test-cpp.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {

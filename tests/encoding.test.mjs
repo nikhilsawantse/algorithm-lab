@@ -3,8 +3,8 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 
-const roots = ["app", "components", "lib", "scripts", "tests"];
-const textExtensions = new Set([".css", ".js", ".mjs", ".ts", ".tsx"]);
+const roots = ["algorithms", "app", "components", "docs", "lib", "scripts", "tests"];
+const textExtensions = new Set([".cpp", ".css", ".java", ".js", ".md", ".mjs", ".py", ".ts", ".tsx"]);
 const corruptedCharacters = /\u00e2|\u00c2|\u00c3|\ufffd/u;
 
 async function collectTextFiles(directory) {

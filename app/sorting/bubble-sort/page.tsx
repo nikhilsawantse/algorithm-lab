@@ -62,7 +62,7 @@ const EXAMPLES = [
 const CODE_EXAMPLES = {
   javascript: {
     label: "JavaScript",
-    filename: "bubble-sort.js",
+    filename: "bubble-sort.mjs",
     highlight: [7, 8, 9],
     code: `function bubbleSort(numbers) {
   const array = [...numbers];
@@ -102,6 +102,65 @@ const CODE_EXAMPLES = {
             break
 
     return array`,
+  },
+  java: {
+    label: "Java",
+    filename: "BubbleSort.java",
+    highlight: [13, 14, 15, 16, 17, 18],
+    code: `import java.util.Arrays;
+
+public final class BubbleSort {
+    private BubbleSort() {
+    }
+
+    public static int[] bubbleSort(int[] numbers) {
+        int[] array = Arrays.copyOf(numbers, numbers.length);
+
+        for (int pass = 0; pass < array.length - 1; pass++) {
+            boolean swapped = false;
+
+            for (int i = 0; i < array.length - pass - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    int temporary = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temporary;
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) break;
+        }
+
+        return array;
+    }
+}`,
+  },
+  cpp: {
+    label: "C++",
+    filename: "bubble_sort.cpp",
+    highlight: [10, 11, 12, 13, 14],
+    code: `#include <vector>
+
+std::vector<int> bubbleSort(const std::vector<int>& numbers) {
+    std::vector<int> array = numbers;
+
+    for (std::size_t pass = 0; pass + 1 < array.size(); ++pass) {
+        bool swapped = false;
+
+        for (std::size_t i = 0; i + pass + 1 < array.size(); ++i) {
+            if (array[i] > array[i + 1]) {
+                const int temporary = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temporary;
+                swapped = true;
+            }
+        }
+
+        if (!swapped) break;
+    }
+
+    return array;
+}`,
   },
 } as const;
 
@@ -543,7 +602,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="section-number">03 — Read the code</p>
           <h2>From idea to working code</h2>
-          <p>Switch languages and compare the same early-exit optimization in JavaScript and Python.</p>
+          <p>Switch among JavaScript, Python, Java, and C++ to compare the same early-exit optimization.</p>
         </div>
         <div className="code-layout">
           <div className="code-window">

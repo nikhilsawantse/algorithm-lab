@@ -1,5 +1,7 @@
 export type AlgorithmStatus = "complete" | "planned";
 export type AlgorithmDifficulty = "Beginner" | "Intermediate" | "Advanced";
+export const supportedLanguages = ["JavaScript", "Python", "Java", "C++"] as const;
+export type SupportedLanguage = (typeof supportedLanguages)[number];
 
 export type AlgorithmLesson = {
   name: string;
@@ -9,7 +11,7 @@ export type AlgorithmLesson = {
   description: string;
   status: AlgorithmStatus;
   href?: string;
-  languages: string[];
+  languages: readonly SupportedLanguage[];
   complexity?: string;
 };
 
@@ -32,17 +34,17 @@ export const algorithms: AlgorithmLesson[] = [
     description: "Compare adjacent values and watch the largest unsorted item rise into place.",
     status: "complete",
     href: "/sorting/bubble-sort",
-    languages: ["JavaScript", "Python"],
+    languages: supportedLanguages,
     complexity: "O(n²)",
   },
-  { name: "Selection Sort", slug: "selection-sort", category: "sorting", difficulty: "Beginner", description: "Repeatedly select the smallest remaining value.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Insertion Sort", slug: "insertion-sort", category: "sorting", difficulty: "Beginner", description: "Grow a sorted region one carefully placed value at a time.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Merge Sort", slug: "merge-sort", category: "sorting", difficulty: "Intermediate", description: "Divide, sort, and merge smaller arrays.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Quick Sort", slug: "quick-sort", category: "sorting", difficulty: "Intermediate", description: "Partition values around a pivot.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Dijkstra's algorithm", slug: "dijkstra", category: "graphs", difficulty: "Intermediate", description: "Find shortest paths through weighted graphs.", status: "planned", languages: ["JavaScript", "Python"] },
-  { name: "Fibonacci memoization", slug: "fibonacci-memoization", category: "dynamic-programming", difficulty: "Beginner", description: "See how caching removes repeated recursive work.", status: "planned", languages: ["JavaScript", "Python"] },
+  { name: "Selection Sort", slug: "selection-sort", category: "sorting", difficulty: "Beginner", description: "Repeatedly select the smallest remaining value.", status: "planned", languages: supportedLanguages },
+  { name: "Insertion Sort", slug: "insertion-sort", category: "sorting", difficulty: "Beginner", description: "Grow a sorted region one carefully placed value at a time.", status: "planned", languages: supportedLanguages },
+  { name: "Merge Sort", slug: "merge-sort", category: "sorting", difficulty: "Intermediate", description: "Divide, sort, and merge smaller arrays.", status: "planned", languages: supportedLanguages },
+  { name: "Quick Sort", slug: "quick-sort", category: "sorting", difficulty: "Intermediate", description: "Partition values around a pivot.", status: "planned", languages: supportedLanguages },
+  { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
+  { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: supportedLanguages },
+  { name: "Dijkstra's algorithm", slug: "dijkstra", category: "graphs", difficulty: "Intermediate", description: "Find shortest paths through weighted graphs.", status: "planned", languages: supportedLanguages },
+  { name: "Fibonacci memoization", slug: "fibonacci-memoization", category: "dynamic-programming", difficulty: "Beginner", description: "See how caching removes repeated recursive work.", status: "planned", languages: supportedLanguages },
 ];
 
 export const availableLessons = algorithms.filter((algorithm) => algorithm.status === "complete");

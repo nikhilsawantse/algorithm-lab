@@ -40,6 +40,7 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /Python/);
   assert.match(html, /Stability proof/);
   assert.match(html, /What you will learn/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
   assert.match(html, /Dry-run trace/);
   assert.match(html, /Common mistakes/);
   assert.match(html, /Check your understanding/);
