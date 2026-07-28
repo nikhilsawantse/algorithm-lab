@@ -180,7 +180,7 @@ function buildSortSteps(source: number[]): SortStep[] {
       sortedFrom: values.length - pass - 1,
       message: changed
         ? `Pass ${pass + 1} complete. ${values[values.length - pass - 1]} is locked in place.`
-        : "No swaps in this pass â€” the array is already sorted.",
+        : "No swaps in this pass — the array is already sorted.",
       pass: pass + 1,
       comparisons,
       swaps,
@@ -249,7 +249,7 @@ export default function Home() {
       .map(Number);
 
     if (parsed.length < 3 || parsed.length > 10 || parsed.some((value) => !Number.isFinite(value) || value < 1 || value > 99)) {
-      setInputError("Enter 3â€“10 numbers from 1 to 99.");
+      setInputError("Enter 3–10 numbers from 1 to 99.");
       return;
     }
 
@@ -340,20 +340,20 @@ export default function Home() {
           <p className="eyebrow"><span /> Sorting algorithms, made visible</p>
           <h1>See every swap.<br /><em>Understand every pass.</em></h1>
           <p className="hero-intro">
-            Bubble Sort repeatedly compares neighbors and moves the larger value right â€” like a bubble rising to the surface.
+            Bubble Sort repeatedly compares neighbors and moves the larger value right — like a bubble rising to the surface.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#visualizer">Start visualizing <span aria-hidden="true">â†“</span></a>
-            <a className="text-link" href="#learn">How it works <span aria-hidden="true">â†’</span></a>
+            <a className="button button-primary" href="#visualizer">Start visualizing <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="#learn">How it works <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div className="hero-demo" aria-label="A small Bubble Sort example">
           <div className="demo-caption"><span>Mini example</span><strong>[ 5, 2, 4 ]</strong></div>
           <div className="mini-flow">
             <div className="mini-row"><span className="mini-index">01</span><div className="mini-cells"><b className="active">5</b><b className="active">2</b><b>4</b></div><small>compare</small></div>
-            <div className="flow-arrow" aria-hidden="true">â†“</div>
+            <div className="flow-arrow" aria-hidden="true">↓</div>
             <div className="mini-row"><span className="mini-index">02</span><div className="mini-cells"><b>2</b><b className="active">5</b><b className="active">4</b></div><small>swap</small></div>
-            <div className="flow-arrow" aria-hidden="true">â†“</div>
+            <div className="flow-arrow" aria-hidden="true">↓</div>
             <div className="mini-row complete"><span className="mini-index">03</span><div className="mini-cells"><b>2</b><b>4</b><b>5</b></div><small>sorted</small></div>
           </div>
           <p className="demo-note"><span>Key idea</span> After one full pass, the largest unsorted value reaches its final position.</p>
@@ -362,9 +362,9 @@ export default function Home() {
 
       <section className="concept-section" id="learn">
         <div className="section-heading">
-          <p className="section-number">01 â€” The idea</p>
+          <p className="section-number">01 — The idea</p>
           <h2>How Bubble Sort thinks</h2>
-          <p>It only needs one question: â€œAre these two neighbors in the right order?â€</p>
+          <p>It only needs one question: “Are these two neighbors in the right order?”</p>
         </div>
         <div className="concept-grid">
           <article className="concept-card">
@@ -375,7 +375,7 @@ export default function Home() {
           </article>
           <article className="concept-card accent-card">
             <span className="concept-step">2</span>
-            <div className="concept-visual"><b>3</b><span className="swap-arrow">â‡„</span><b>7</b></div>
+            <div className="concept-visual"><b>3</b><span className="swap-arrow">⇄</span><b>7</b></div>
             <h3>Swap when needed</h3>
             <p>If the left value is larger, exchange their positions.</p>
           </article>
@@ -390,7 +390,7 @@ export default function Home() {
 
       <section className="visualizer-section" id="visualizer">
         <div className="section-heading light-heading">
-          <p className="section-number">02 â€” Try it yourself</p>
+          <p className="section-number">02 — Try it yourself</p>
           <h2>Watch the algorithm work</h2>
           <p>Use your own numbers, then play the sort or move through one decision at a time.</p>
         </div>
@@ -426,16 +426,16 @@ export default function Home() {
                 aria-describedby={inputError ? "input-error" : "input-help"}
               />
               <button className="button button-apply" type="button" onClick={applyInput}>Apply</button>
-              <button className="icon-button" type="button" onClick={shuffleValues} aria-label="Generate a random array">â†»</button>
+              <button className="icon-button" type="button" onClick={shuffleValues} aria-label="Generate a random array">↻</button>
             </div>
             <small id={inputError ? "input-error" : "input-help"} className={inputError ? "error-text" : "helper-text"}>
-              {inputError || "3â€“10 values, each from 1 to 99"}
+              {inputError || "3–10 values, each from 1 to 99"}
             </small>
           </div>
 
           <div className="visual-stage">
             <div className="stage-meta">
-              <span>Pass <strong>{current.pass || "â€”"}</strong></span>
+              <span>Pass <strong>{current.pass || "—"}</strong></span>
               <span className="status-dot"><i /> {cursor === steps.length - 1 ? "Complete" : playing ? "Running" : "Paused"}</span>
             </div>
             <div className="bars" role="img" aria-label={`Current array: ${current.values.join(", ")}`}>
@@ -457,17 +457,17 @@ export default function Home() {
               })}
             </div>
             <div className="step-message" aria-live="polite">
-              <span>{cursor === steps.length - 1 ? "âœ“" : current.swapped.length ? "â‡„" : current.comparing.length ? "?" : "â†’"}</span>
+              <span>{cursor === steps.length - 1 ? "✓" : current.swapped.length ? "⇄" : current.comparing.length ? "?" : "→"}</span>
               <p>{current.message}</p>
             </div>
           </div>
 
           <div className="playback">
             <button className="play-button" type="button" onClick={() => cursor === steps.length - 1 ? resetVisualizer() : setPlaying((value) => !value)}>
-              <span aria-hidden="true">{cursor === steps.length - 1 ? "â†º" : playing ? "â…¡" : "â–¶"}</span>
+              <span aria-hidden="true">{cursor === steps.length - 1 ? "↺" : playing ? "Ⅱ" : "▶"}</span>
               {cursor === steps.length - 1 ? "Replay" : playing ? "Pause" : "Play sort"}
             </button>
-            <button className="step-button" type="button" onClick={nextStep} disabled={cursor === steps.length - 1}>Step â†’</button>
+            <button className="step-button" type="button" onClick={nextStep} disabled={cursor === steps.length - 1}>Step →</button>
             <div className="speed-control">
               <label htmlFor="speed">Speed</label>
               <input id="speed" type="range" min="180" max="1100" step="10" value={1280 - speed} onChange={(event) => setSpeed(1280 - Number(event.target.value))} />
@@ -486,7 +486,7 @@ export default function Home() {
 
       <section className="code-section">
         <div className="section-heading">
-          <p className="section-number">03 â€” Read the code</p>
+          <p className="section-number">03 — Read the code</p>
           <h2>From idea to working code</h2>
           <p>Switch languages and compare the same early-exit optimization in JavaScript and Python.</p>
         </div>
@@ -522,14 +522,14 @@ export default function Home() {
           <aside className="complexity-panel">
             <h3>Complexity at a glance</h3>
             <div className="complexity-row"><span>Best case <small>Already sorted</small></span><strong>O(n)</strong></div>
-            <div className="complexity-row"><span>Average case</span><strong>O(nÂ²)</strong></div>
-            <div className="complexity-row"><span>Worst case <small>Reverse order</small></span><strong>O(nÂ²)</strong></div>
+            <div className="complexity-row"><span>Average case</span><strong>O(n²)</strong></div>
+            <div className="complexity-row"><span>Worst case <small>Reverse order</small></span><strong>O(n²)</strong></div>
             <div className="complexity-row"><span>Extra space</span><strong>O(1)</strong></div>
-            <div className="stable-note"><span>âœ“</span><p><strong>Stable sort</strong><br />Equal values keep their original relative order.</p></div>
+            <div className="stable-note"><span>✓</span><p><strong>Stable sort</strong><br />Equal values keep their original relative order.</p></div>
             <div className="stability-proof" aria-label="Stability example">
               <small>Stability proof</small>
               <div><span>4A</span><span>2</span><span>4B</span><span>1</span></div>
-              <i aria-hidden="true">â†“</i>
+              <i aria-hidden="true">↓</i>
               <div className="is-sorted"><span>1</span><span>2</span><span>4A</span><span>4B</span></div>
               <p>The equal fours never cross, so A remains before B.</p>
             </div>
@@ -539,7 +539,7 @@ export default function Home() {
 
       <section className="challenge-section" id="challenge">
         <div className="challenge-copy">
-          <p className="section-number">04 â€” Mini game</p>
+          <p className="section-number">04 — Mini game</p>
           <h2>Be the algorithm</h2>
           <p>Sort the packages from smallest to largest. Just like Bubble Sort, you may only swap adjacent neighbors.</p>
           <div className="game-rule"><span>Rule</span> Select one package, then select a neighbor to swap them.</div>
@@ -556,14 +556,14 @@ export default function Home() {
                 aria-pressed={selected === index}
                 aria-label={`Package ${value}, position ${index + 1}`}
               >
-                <span>{value}</span><i aria-hidden="true">â–¦</i>
+                <span>{value}</span><i aria-hidden="true">▦</i>
               </button>
             ))}
           </div>
           <div className="belt"><span /><span /><span /><span /><span /><span /></div>
           <div className={challengeWon ? "game-feedback won" : "game-feedback"} aria-live="polite">
-            <span>{challengeWon ? "â˜…" : "â†”"}</span>
-            <p>{challengeWon ? `Nicely done â€” sorted in ${moves} adjacent swaps.` : selected === null ? "Choose a package to begin." : "Now choose a package directly beside it."}</p>
+            <span>{challengeWon ? "★" : "↔"}</span>
+            <p>{challengeWon ? `Nicely done — sorted in ${moves} adjacent swaps.` : selected === null ? "Choose a package to begin." : "Now choose a package directly beside it."}</p>
             <button type="button" onClick={resetChallenge}>{challengeWon ? "Play again" : "Reset"}</button>
           </div>
         </div>
@@ -571,21 +571,21 @@ export default function Home() {
 
       <section className="use-cases">
         <div className="section-heading">
-          <p className="section-number">05 â€” Use it wisely</p>
+          <p className="section-number">05 — Use it wisely</p>
           <h2>Where Bubble Sort fits</h2>
         </div>
         <div className="use-grid">
-          <article><span className="use-icon">â—Ž</span><h3>Learning</h3><p>Its neighbor-by-neighbor logic makes sorting fundamentals easy to see and debug.</p><small>Great fit</small></article>
-          <article><span className="use-icon">â‰‹</span><h3>Tiny datasets</h3><p>For a handful of values, clarity can matter more than performance.</p><small>Reasonable fit</small></article>
-          <article><span className="use-icon">â†»</span><h3>Nearly sorted data</h3><p>With the early-exit flag, one clean pass can finish in linear time.</p><small>Good special case</small></article>
-          <article className="avoid"><span className="use-icon">Ã—</span><h3>Large datasets</h3><p>Quadratic growth becomes expensive quickly. Prefer Merge Sort or Quick Sort.</p><small>Avoid</small></article>
+          <article><span className="use-icon">◉</span><h3>Learning</h3><p>Its neighbor-by-neighbor logic makes sorting fundamentals easy to see and debug.</p><small>Great fit</small></article>
+          <article><span className="use-icon">≋</span><h3>Tiny datasets</h3><p>For a handful of values, clarity can matter more than performance.</p><small>Reasonable fit</small></article>
+          <article><span className="use-icon">↻</span><h3>Nearly sorted data</h3><p>With the early-exit flag, one clean pass can finish in linear time.</p><small>Good special case</small></article>
+          <article className="avoid"><span className="use-icon">×</span><h3>Large datasets</h3><p>Quadratic growth becomes expensive quickly. Prefer Merge Sort or Quick Sort.</p><small>Avoid</small></article>
         </div>
       </section>
 
       <footer>
         <div><span className="brand-mark">A</span><p><strong>Algorithm Lab</strong><br /><small>Interactive algorithms, free for everyone.</small></p></div>
         <p>Lesson 01 of the Sorting track</p>
-        <a href="#top">Back to top â†‘</a>
+        <a href="#top">Back to top ↑</a>
       </footer>
     </main>
   );
