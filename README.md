@@ -10,6 +10,7 @@ There are no accounts, paid tiers, or locked lessons. The goal is to make high-q
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Sorting | [Bubble Sort](./app/sorting/bubble-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 | Sorting | [Selection Sort](./app/sorting/selection-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
+| Sorting | [Insertion Sort](./app/sorting/insertion-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ## Learning method
 
@@ -48,7 +49,7 @@ pnpm test:cpp
 ```text
 algorithm-lab/
 ├── app/                         # Catalog, glossary, and lesson routes
-│   └── sorting/                # Bubble Sort and Selection Sort lessons
+│   └── sorting/                # Interactive sorting lessons
 ├── algorithms/                  # Tested reference implementations
 │   └── sorting/                # Tested implementations for each lesson
 ├── components/                  # Shared platform components

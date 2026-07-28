@@ -19,8 +19,9 @@ test("complete lessons satisfy the standard lesson definition", async () => {
   try {
     const schema = await server.ssrLoadModule("/lib/lesson-schema.ts");
     const bubbleModule = await server.ssrLoadModule("/lib/lessons/bubble-sort.ts");
+    const insertionModule = await server.ssrLoadModule("/lib/lessons/insertion-sort.ts");
     const selectionModule = await server.ssrLoadModule("/lib/lessons/selection-sort.ts");
-    const lessons = [bubbleModule.bubbleSortLesson, selectionModule.selectionSortLesson];
+    const lessons = [bubbleModule.bubbleSortLesson, selectionModule.selectionSortLesson, insertionModule.insertionSortLesson];
 
     for (const lesson of lessons) {
       assert.deepEqual(Object.keys(lesson.codeExamples), schema.supportedLanguageIds);

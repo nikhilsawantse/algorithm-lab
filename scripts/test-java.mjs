@@ -9,6 +9,7 @@ const outputDirectory = mkdtempSync(path.join(tmpdir(), "algorithm-lab-java-"));
 const suites = [
   { directory: "bubble-sort", source: "BubbleSort.java", test: "BubbleSortTest.java", className: "BubbleSortTest" },
   { directory: "selection-sort", source: "SelectionSort.java", test: "SelectionSortTest.java", className: "SelectionSortTest" },
+  { directory: "insertion-sort", source: "InsertionSort.java", test: "InsertionSortTest.java", className: "InsertionSortTest" },
 ];
 
 function run(command, arguments_) {
