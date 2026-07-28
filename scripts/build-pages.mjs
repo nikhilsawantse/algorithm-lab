@@ -44,9 +44,14 @@ async function renderRoute(route) {
     (reference) => reference.replace('="/', `="${siteBase}/`),
   );
   const invalidRootReference = /(?:href|src)="\/(?!\/|algorithm-lab(?:\/|"))/.exec(html);
+  const encodingArtifact = /\u00e2|\u00c2|\u00c3|\ufffd/u.exec(html);
 
   if (invalidRootReference) {
     throw new Error(`Found a root-relative URL that bypasses ${siteBase}: ${invalidRootReference[0]}`);
+  }
+
+  if (encodingArtifact) {
+    throw new Error(`Found a character-encoding artifact in ${route}: ${encodingArtifact[0]}`);
   }
 
   const outputDirectory = route === "/" ? pagesDirectory : path.join(pagesDirectory, route.slice(1));

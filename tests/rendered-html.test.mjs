@@ -39,8 +39,12 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /Duplicate values/);
   assert.match(html, /Python/);
   assert.match(html, /Stability proof/);
+  assert.match(html, /What you will learn/);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
   assert.match(html, /Be the algorithm/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
 });
 
 test("server-renders the foundations glossary", async () => {
