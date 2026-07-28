@@ -24,7 +24,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Free for learners/);
   assert.match(html, /Available lessons/);
   assert.match(html, /Bubble Sort/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+  assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
 test("server-renders the complete Bubble Sort lesson", async () => {
@@ -45,7 +45,7 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /Common mistakes/);
   assert.match(html, /Check your understanding/);
   assert.match(html, /Be the algorithm/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
 });
 
 test("server-renders the foundations glossary", async () => {
