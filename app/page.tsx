@@ -1,6 +1,7 @@
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { algorithms, availableLessons, categories, lessonsForCategory } from "../lib/algorithms";
+import { sitePath } from "../lib/site-path";
 
 const learningSteps = [
   { number: "01", title: "Understand", description: "Begin with a plain-language mental model and a concrete problem." },
@@ -22,7 +23,7 @@ export default function AlgorithmLabHome() {
             Explore algorithms through interactive visualizations, working code, guided examples, and small challenges—freely available to every learner.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/sorting/bubble-sort">Start with Bubble Sort <span aria-hidden="true">→</span></a>
+            <a className="button button-primary" href={sitePath("/sorting/bubble-sort")}>Start with Bubble Sort <span aria-hidden="true">→</span></a>
             <a className="text-link" href="#categories">Browse the roadmap ↓</a>
           </div>
         </div>
@@ -46,7 +47,7 @@ export default function AlgorithmLabHome() {
         </div>
         <div className="featured-lessons">
           {availableLessons.map((lesson, index) => (
-            <a className="featured-lesson" href={lesson.href} key={lesson.slug}>
+            <a className="featured-lesson" href={sitePath(lesson.href)} key={lesson.slug}>
               <span className="lesson-index">{String(index + 1).padStart(2, "0")}</span>
               <div className="lesson-main">
                 <div className="lesson-badges"><span>{lesson.category}</span><span>{lesson.difficulty}</span></div>
@@ -113,8 +114,8 @@ export default function AlgorithmLabHome() {
             Algorithm Lab has no sign-in gate, paid tier, or locked lesson. The source code is open, the study material is reusable with attribution, and contributions are welcome.
           </p>
           <div className="open-actions">
-            <a className="button button-primary" href="/sorting/bubble-sort">Study the first lesson <span>→</span></a>
-            <a className="text-link" href="/glossary">Read the glossary</a>
+            <a className="button button-primary" href={sitePath("/sorting/bubble-sort")}>Study the first lesson <span>→</span></a>
+            <a className="text-link" href={sitePath("/glossary")}>Read the glossary</a>
           </div>
         </div>
       </section>

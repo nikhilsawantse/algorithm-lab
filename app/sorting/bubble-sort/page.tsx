@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { sitePath } from "../../../lib/site-path";
 
 type SortStep = {
   values: number[];
@@ -321,12 +322,12 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Algorithm Lab home">
+        <a className="brand" href={sitePath("/")} aria-label="Algorithm Lab home">
           <span className="brand-mark">A</span>
           <span>Algorithm Lab</span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="/">Explore</a>
+          <a href={sitePath("/")}>Explore</a>
           <a href="#learn">Learn</a>
           <a href="#visualizer">Visualizer</a>
           <a href="#challenge">Challenge</a>
@@ -589,4 +590,3 @@ export default function Home() {
     </main>
   );
 }
-

@@ -1,3 +1,5 @@
+import { sitePath } from "../lib/site-path";
+
 export function SiteFooter() {
   return (
     <footer className="platform-footer">
@@ -6,7 +8,7 @@ export function SiteFooter() {
         <p><strong>Algorithm Lab</strong><br /><small>Learn by seeing, doing, and experimenting.</small></p>
       </div>
       <p>Free educational material. No account. No paywall.</p>
-      <a href="/glossary">Open the glossary →</a>
+      <a href={sitePath("/glossary")}>Open the glossary →</a>
     </footer>
   );
 }

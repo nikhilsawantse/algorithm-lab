@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { sitePath } from "../../lib/site-path";
 
 export const metadata: Metadata = {
   title: "Algorithm Glossary | Algorithm Lab",
@@ -43,7 +44,7 @@ export default function GlossaryPage() {
       </section>
       <section className="glossary-next">
         <p>Ready to see these ideas in motion?</p>
-        <a className="button button-primary" href="/sorting/bubble-sort">Open Bubble Sort <span>→</span></a>
+        <a className="button button-primary" href={sitePath("/sorting/bubble-sort")}>Open Bubble Sort <span>→</span></a>
       </section>
       <SiteFooter />
     </main>

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:pages": "vinext build && node scripts/build-pages.mjs",
     "start": "vinext start",
     "test": "vinext build && node --test tests/bubble-sort.test.mjs tests/rendered-html.test.mjs",
     "test:python": "python algorithms/sorting/bubble-sort/test_bubble_sort.py",

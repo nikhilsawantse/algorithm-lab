@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Mono, Manrope } from "next/font/google";
 import { headers } from "next/headers";
+import { sitePath } from "../lib/site-path";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const imageUrl = `${protocol}://${host}/og-v2.png`;
+  const imageUrl = `${protocol}://${host}${sitePath("/og-v2.png")}`;
   const description = "Free interactive algorithm lessons with visualizations, tested code, guided examples, and challenges.";
 
   return {
