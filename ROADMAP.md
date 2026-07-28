@@ -2,7 +2,7 @@
 
 The roadmap favors a strong learning sequence over a large but shallow list of pages.
 
-## Foundation — in progress
+## Foundation — complete
 
 - [x] Public algorithm catalog
 - [x] Category and lesson registry
@@ -18,7 +18,7 @@ The roadmap favors a strong learning sequence over a large but shallow list of p
 ## Track 1 — Sorting
 
 - [x] Bubble Sort
-- [ ] Selection Sort
+- [x] Selection Sort
 - [ ] Insertion Sort
 - [ ] Merge Sort
 - [ ] Quick Sort

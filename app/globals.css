@@ -271,6 +271,7 @@ h1 em { color: #5a7267; font-style: normal; font-weight: 500; }
 .bar-index { font: 400 9px var(--font-mono); color: #9aa29d; }
 .bar-column.comparing .bar { background: var(--lime); border-color: #a2b84d; transform: translateY(-4px); }
 .bar-column.swapped .bar { background: var(--orange); border-color: #cc7934; transform: translateY(-4px); }
+.bar-column.minimum .bar { background: #b7cef4; border-color: #6f91c5; transform: translateY(-4px); }
 .bar-column.sorted .bar { background: var(--mint); border-color: #50b98e; }
 .step-message { min-height: 62px; display: flex; align-items: center; justify-content: center; gap: 13px; font-size: 13px; }
 .step-message > span { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: #e5f6ee; color: #287451; font-weight: 800; }
@@ -292,6 +293,7 @@ h1 em { color: #5a7267; font-style: normal; font-weight: 500; }
 .legend span { display: flex; align-items: center; gap: 6px; font: 400 9px var(--font-mono); color: #758079; text-transform: uppercase; }
 .legend i { width: 9px; height: 9px; }
 .legend-compare { background: var(--lime); }
+.legend-minimum { background: #b7cef4; }
 .legend-sorted { background: var(--mint); }
 .trace-panel { border-top: 1px solid #d8ddd6; background: white; padding: 28px 25px 24px; }
 .trace-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 19px; }
@@ -386,6 +388,8 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .package { width: 61px; height: 76px; border: 1px solid #b7a071; background: #eac985; color: #533f23; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; box-shadow: inset 0 0 0 3px rgba(255,255,255,.18); transition: transform .18s ease, outline .18s ease; }
 .package:hover { transform: translateY(-3px); }
 .package.selected { outline: 3px solid var(--green); outline-offset: 3px; transform: translateY(-7px); }
+.package.locked { background: var(--mint); border-color: #50a983; color: var(--green); cursor: default; }
+.package:disabled:hover { transform: none; }
 .package span { font: 500 19px var(--font-mono); }
 .package i { font-style: normal; opacity: .45; }
 .belt { height: 33px; background: #314039; display: flex; align-items: center; justify-content: space-around; padding: 0 25px; }

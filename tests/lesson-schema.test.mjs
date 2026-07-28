@@ -7,7 +7,7 @@ import { createServer } from "vite";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-test("Bubble Sort satisfies the standard lesson definition", async () => {
+test("complete lessons satisfy the standard lesson definition", async () => {
   const server = await createServer({
     root,
     configFile: false,
@@ -18,23 +18,27 @@ test("Bubble Sort satisfies the standard lesson definition", async () => {
 
   try {
     const schema = await server.ssrLoadModule("/lib/lesson-schema.ts");
-    const lessons = await server.ssrLoadModule("/lib/lessons/bubble-sort.ts");
-    const lesson = lessons.bubbleSortLesson;
+    const bubbleModule = await server.ssrLoadModule("/lib/lessons/bubble-sort.ts");
+    const selectionModule = await server.ssrLoadModule("/lib/lessons/selection-sort.ts");
+    const lessons = [bubbleModule.bubbleSortLesson, selectionModule.selectionSortLesson];
 
-    assert.equal(lesson.slug, "bubble-sort");
-    assert.deepEqual(Object.keys(lesson.codeExamples), schema.supportedLanguageIds);
-    assert.deepEqual(
-      Object.values(lesson.codeExamples).map((example) => example.label),
-      schema.supportedLanguages,
-    );
-    await Promise.all(Object.values(lesson.codeExamples).map((example) => (
-      access(path.join(root, "algorithms", "sorting", lesson.slug, example.filename))
-    )));
-    assert.equal(lesson.learningPath.length, 8);
-    assert.equal(lesson.studyGuide.quiz.length, 4);
-    assert.equal(lesson.completionCriteria.length, 4);
-    assert.ok(lesson.examples.length >= 3);
-    assert.ok(lesson.useCases.some((useCase) => useCase.avoid));
+    for (const lesson of lessons) {
+      assert.deepEqual(Object.keys(lesson.codeExamples), schema.supportedLanguageIds);
+      assert.deepEqual(
+        Object.values(lesson.codeExamples).map((example) => example.label),
+        schema.supportedLanguages,
+      );
+      await Promise.all(Object.values(lesson.codeExamples).map((example) => (
+        access(path.join(root, "algorithms", "sorting", lesson.slug, example.filename))
+      )));
+      assert.equal(lesson.learningPath.length, 8);
+      assert.equal(lesson.studyGuide.quiz.length, 4);
+      assert.equal(lesson.completionCriteria.length, 4);
+      assert.ok(lesson.examples.length >= 3);
+      assert.ok(lesson.useCases.some((useCase) => useCase.avoid));
+    }
+
+    const lesson = lessons[0];
 
     const invalidLesson = structuredClone(lesson);
     invalidLesson.studyGuide.quiz[0].correctOption = 99;

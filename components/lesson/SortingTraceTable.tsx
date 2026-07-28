@@ -15,9 +15,10 @@ type SortingTraceTableProps = {
   algorithmName: string;
   currentStep: number;
   rows: readonly SortingTraceRow[];
+  pairColumnLabel?: string;
 };
 
-export function SortingTraceTable({ algorithmName, currentStep, rows }: SortingTraceTableProps) {
+export function SortingTraceTable({ algorithmName, currentStep, rows, pairColumnLabel = "Pair" }: SortingTraceTableProps) {
   const [showFullTrace, setShowFullTrace] = useState(false);
   const visibleRows = showFullTrace ? rows : rows.slice(-8);
 
@@ -38,7 +39,7 @@ export function SortingTraceTable({ algorithmName, currentStep, rows }: SortingT
         <table className="trace-table">
           <caption>{showFullTrace ? `Full ${algorithmName} trace` : `The latest eight ${algorithmName} decisions`}</caption>
           <thead>
-            <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">Pair</th><th scope="col">Array after step</th><th scope="col">Swaps</th></tr>
+            <tr><th scope="col">Step</th><th scope="col">Pass</th><th scope="col">Action</th><th scope="col">{pairColumnLabel}</th><th scope="col">Array after step</th><th scope="col">Swaps</th></tr>
           </thead>
           <tbody>
             {visibleRows.map((row) => (

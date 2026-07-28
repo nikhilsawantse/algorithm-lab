@@ -22,8 +22,14 @@ test("lesson navigation follows curriculum order and respects planned lessons", 
     assert.equal(navigation.current.name, "Bubble Sort");
     assert.equal(navigation.previous, null);
     assert.equal(navigation.next.name, "Selection Sort");
-    assert.equal(navigation.next.status, "planned");
-    assert.equal(navigation.next.href, undefined);
+    assert.equal(navigation.next.status, "complete");
+    assert.equal(navigation.next.href, "/sorting/selection-sort");
+
+    const selectionNavigation = registry.lessonNavigationFor("selection-sort");
+    assert.equal(selectionNavigation.previous.name, "Bubble Sort");
+    assert.equal(selectionNavigation.previous.href, "/sorting/bubble-sort");
+    assert.equal(selectionNavigation.next.name, "Insertion Sort");
+    assert.equal(selectionNavigation.next.status, "planned");
     assert.equal(registry.lessonNavigationFor("missing-lesson"), null);
   } finally {
     await server.close();

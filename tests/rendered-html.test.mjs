@@ -24,6 +24,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Free for learners/);
   assert.match(html, /Available lessons/);
   assert.match(html, /Bubble Sort/);
+  assert.match(html, /Selection Sort/);
   assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
@@ -49,10 +50,36 @@ test("server-renders the complete Bubble Sort lesson", async () => {
   assert.match(html, /Be the algorithm/);
   assert.match(html, /Continue learning/);
   assert.match(html, /Selection Sort/);
-  assert.match(html, /Coming next/);
+  assert.match(html, /sorting\/selection-sort/);
   assert.match(html, /Finish this lesson with confidence/);
   assert.match(html, /Progress stays only in this browser/);
   assert.match(html, /Mark lesson complete/);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+});
+
+test("server-renders the complete Selection Sort lesson", async () => {
+  const response = await render("/sorting/selection-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Find the smallest/);
+  assert.match(html, /Watch the minimum move into place/);
+  assert.match(html, /Classic example/);
+  assert.match(html, /Already sorted/);
+  assert.match(html, /Reverse order/);
+  assert.match(html, /Duplicate values/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Candidates \/ minimum/);
+  assert.match(html, /Complexity at a glance/);
+  assert.match(html, /Instability example/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
+  assert.match(html, /Choose the minimum/);
+  assert.match(html, /Bubble Sort/);
+  assert.match(html, /Insertion Sort/);
+  assert.match(html, /Coming next/);
+  assert.match(html, /Finish this lesson with confidence/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
 });
 

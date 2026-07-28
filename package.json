@@ -11,8 +11,8 @@
     "build": "vinext build",
     "build:pages": "vinext build && node scripts/build-pages.mjs",
     "start": "vinext start",
-    "test": "vinext build && node --test tests/bubble-sort.test.mjs tests/encoding.test.mjs tests/lesson-navigation.test.mjs tests/lesson-progress.test.mjs tests/lesson-schema.test.mjs tests/rendered-html.test.mjs",
-    "test:python": "python algorithms/sorting/bubble-sort/test_bubble_sort.py",
+    "test": "vinext build && node --test tests/bubble-sort.test.mjs tests/selection-sort.test.mjs tests/encoding.test.mjs tests/lesson-navigation.test.mjs tests/lesson-progress.test.mjs tests/lesson-schema.test.mjs tests/rendered-html.test.mjs",
+    "test:python": "node scripts/test-python.mjs",
     "test:java": "node scripts/test-java.mjs",
     "test:cpp": "node scripts/test-cpp.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"

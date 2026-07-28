@@ -1,4 +1,5 @@
 import { bubbleSortLesson } from "./lessons/bubble-sort";
+import { selectionSortLesson } from "./lessons/selection-sort";
 import { supportedLanguages } from "./lesson-schema";
 import type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
 
@@ -40,7 +41,17 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: bubbleSortLesson.complexity.average.value,
   },
-  { name: "Selection Sort", slug: "selection-sort", category: "sorting", difficulty: "Beginner", description: "Repeatedly select the smallest remaining value.", status: "planned", languages: supportedLanguages },
+  {
+    name: selectionSortLesson.name,
+    slug: selectionSortLesson.slug,
+    category: selectionSortLesson.category,
+    difficulty: selectionSortLesson.difficulty,
+    description: selectionSortLesson.description,
+    status: "complete",
+    href: "/sorting/selection-sort",
+    languages: supportedLanguages,
+    complexity: selectionSortLesson.complexity.average.value,
+  },
   { name: "Insertion Sort", slug: "insertion-sort", category: "sorting", difficulty: "Beginner", description: "Grow a sorted region one carefully placed value at a time.", status: "planned", languages: supportedLanguages },
   { name: "Merge Sort", slug: "merge-sort", category: "sorting", difficulty: "Intermediate", description: "Divide, sort, and merge smaller arrays.", status: "planned", languages: supportedLanguages },
   { name: "Quick Sort", slug: "quick-sort", category: "sorting", difficulty: "Intermediate", description: "Partition values around a pivot.", status: "planned", languages: supportedLanguages },

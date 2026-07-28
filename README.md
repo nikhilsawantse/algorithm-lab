@@ -9,6 +9,7 @@ There are no accounts, paid tiers, or locked lessons. The goal is to make high-q
 | Category | Lesson | Level | JavaScript | Python | Java | C++ | Visualizer | Challenge |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Sorting | [Bubble Sort](./app/sorting/bubble-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
+| Sorting | [Selection Sort](./app/sorting/selection-sort/page.tsx) | Beginner | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ## Learning method
 
@@ -47,9 +48,9 @@ pnpm test:cpp
 ```text
 algorithm-lab/
 ├── app/                         # Catalog, glossary, and lesson routes
-│   └── sorting/bubble-sort/
+│   └── sorting/                # Bubble Sort and Selection Sort lessons
 ├── algorithms/                  # Tested reference implementations
-│   └── sorting/bubble-sort/
+│   └── sorting/                # Tested implementations for each lesson
 ├── components/                  # Shared platform components
 ├── lib/lesson-schema.ts         # Validated definition shared by every lesson
 ├── lib/lessons/                 # Data-driven lesson content

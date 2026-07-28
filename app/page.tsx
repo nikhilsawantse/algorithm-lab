@@ -6,7 +6,7 @@ import { sitePath } from "../lib/site-path";
 const learningSteps = [
   { number: "01", title: "Understand", description: "Begin with a plain-language mental model and a concrete problem." },
   { number: "02", title: "Visualize", description: "Move through every comparison, choice, state change, and result." },
-  { number: "03", title: "Implement", description: "Compare tested JavaScript and Python implementations." },
+  { number: "03", title: "Implement", description: "Compare tested JavaScript, Python, Java, and C++ implementations." },
   { number: "04", title: "Practice", description: "Use examples, challenges, and games to make the idea stick." },
 ];
 
@@ -31,7 +31,7 @@ export default function AlgorithmLabHome() {
           <p className="manifesto-label">Our learning promise</p>
           <div><strong>₹0</strong><span>Cost to learn</span></div>
           <div><strong>No</strong><span>Account required</span></div>
-          <div><strong>2</strong><span>Languages per lesson</span></div>
+          <div><strong>4</strong><span>Languages per lesson</span></div>
           <div><strong>Open</strong><span>To contributors</span></div>
           <p className="manifesto-note">Knowledge grows when it is shared.</p>
         </div>

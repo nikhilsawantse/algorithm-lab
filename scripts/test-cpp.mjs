@@ -5,9 +5,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const sourceDirectory = path.join(root, "algorithms", "sorting", "bubble-sort");
 const outputDirectory = mkdtempSync(path.join(tmpdir(), "algorithm-lab-cpp-"));
-const executable = path.join(outputDirectory, process.platform === "win32" ? "bubble-sort-tests.exe" : "bubble-sort-tests");
+const suites = [
+  { directory: "bubble-sort", source: "bubble_sort.cpp", test: "test_bubble_sort.cpp", executable: "bubble-sort-tests" },
+  { directory: "selection-sort", source: "selection_sort.cpp", test: "test_selection_sort.cpp", executable: "selection-sort-tests" },
+];
 
 function run(command, arguments_) {
   const result = spawnSync(command, arguments_, { encoding: "utf8", stdio: "pipe" });
@@ -18,17 +20,22 @@ function run(command, arguments_) {
 }
 
 try {
-  run("g++", [
-    "-std=c++17",
-    "-Wall",
-    "-Wextra",
-    "-pedantic",
-    path.join(sourceDirectory, "bubble_sort.cpp"),
-    path.join(sourceDirectory, "test_bubble_sort.cpp"),
-    "-o",
-    executable,
-  ]);
-  run(executable, []);
+  for (const suite of suites) {
+    const sourceDirectory = path.join(root, "algorithms", "sorting", suite.directory);
+    const executableName = process.platform === "win32" ? `${suite.executable}.exe` : suite.executable;
+    const executable = path.join(outputDirectory, executableName);
+    run("g++", [
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      path.join(sourceDirectory, suite.source),
+      path.join(sourceDirectory, suite.test),
+      "-o",
+      executable,
+    ]);
+    run(executable, []);
+  }
 } finally {
   rmSync(outputDirectory, { recursive: true, force: true });
 }
