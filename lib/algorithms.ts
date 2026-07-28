@@ -55,3 +55,17 @@ export const availableLessons = algorithms.filter((algorithm) => algorithm.statu
 export function lessonsForCategory(category: string) {
   return algorithms.filter((algorithm) => algorithm.category === category);
 }
+
+export function lessonNavigationFor(slug: string) {
+  const current = algorithms.find((algorithm) => algorithm.slug === slug);
+  if (!current) return null;
+
+  const trackLessons = lessonsForCategory(current.category);
+  const currentIndex = trackLessons.findIndex((algorithm) => algorithm.slug === slug);
+
+  return {
+    current,
+    previous: currentIndex > 0 ? trackLessons[currentIndex - 1] : null,
+    next: currentIndex < trackLessons.length - 1 ? trackLessons[currentIndex + 1] : null,
+  };
+}

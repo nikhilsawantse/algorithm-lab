@@ -405,6 +405,23 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .use-grid article.avoid { background: #f5ebe6; }
 .use-grid article.avoid .use-icon, .use-grid article.avoid small { color: var(--red); }
 
+.lesson-navigation { padding: 90px max(20px, calc((100vw - 1180px) / 2)); background: #e5eee6; border-top: 1px solid #cdd9cf; }
+.lesson-navigation-inner { width: min(1180px, 100%); margin: 0 auto; }
+.lesson-navigation-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 45px; margin-bottom: 36px; }
+.lesson-navigation-heading h2 { margin: 0; font-size: clamp(31px, 3.5vw, 45px); line-height: 1.1; letter-spacing: -.05em; text-transform: capitalize; }
+.lesson-navigation-heading > p { max-width: 410px; margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.65; text-align: right; }
+.lesson-navigation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.lesson-nav-card { min-height: 220px; display: flex; flex-direction: column; align-items: flex-start; padding: 27px; border: 1px solid #c7d3c9; background: var(--card); }
+.lesson-nav-card.is-next { text-align: right; align-items: flex-end; }
+.lesson-nav-card.is-link { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.lesson-nav-card.is-link:hover { transform: translateY(-3px); border-color: #73aa8f; box-shadow: 0 10px 24px rgba(23,63,50,.08); }
+.lesson-nav-direction { color: #37785b; font: 600 9px var(--font-mono); text-transform: uppercase; letter-spacing: .1em; }
+.lesson-nav-card strong { margin-top: 27px; font-size: 23px; letter-spacing: -.035em; }
+.lesson-nav-card p { max-width: 480px; margin: 9px 0 22px; color: var(--ink-soft); font-size: 13px; line-height: 1.6; }
+.lesson-nav-card small { margin-top: auto; color: #4e725f; font: 500 9px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+.lesson-nav-card.is-planned { background: #edf0e9; border-style: dashed; }
+.lesson-nav-card.is-planned .lesson-nav-direction, .lesson-nav-card.is-planned small { color: #7a867f; }
+
 footer { background: var(--green); color: white; padding: 35px max(20px, calc((100vw - 1180px) / 2)); display: flex; align-items: center; justify-content: space-between; }
 footer > div { display: flex; align-items: center; gap: 11px; }
 footer p { margin: 0; font-size: 11px; color: #b8c9c1; }
@@ -429,6 +446,8 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .quiz-intro { position: static; }
   .challenge-section { grid-template-columns: 1fr; gap: 45px; }
   .use-grid { grid-template-columns: repeat(2, 1fr); }
+  .lesson-navigation-heading { align-items: flex-start; flex-direction: column; gap: 15px; }
+  .lesson-navigation-heading > p { text-align: left; }
 }
 
 @media (max-width: 650px) {
@@ -486,6 +505,9 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .conveyor { gap: 3px; padding-left: 8px; padding-right: 8px; }
   .package { width: 43px; height: 64px; }
   .use-grid { grid-template-columns: 1fr; }
+  .lesson-navigation { padding-top: 70px; padding-bottom: 70px; }
+  .lesson-navigation-grid { grid-template-columns: 1fr; }
+  .lesson-nav-card, .lesson-nav-card.is-next { min-height: 195px; align-items: flex-start; text-align: left; }
   footer { align-items: flex-start; flex-direction: column; gap: 25px; }
 }
 

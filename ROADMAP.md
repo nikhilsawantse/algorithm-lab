@@ -11,6 +11,7 @@ The roadmap favors a strong learning sequence over a large but shallow list of p
 - [x] JavaScript, Python, Java, and C++ correctness tests
 - [x] Bubble Sort interactive lesson
 - [x] Typed, data-driven lesson definitions
+- [x] Previous and next lesson navigation
 - [ ] Reusable visualizer control components
 - [ ] Keyboard-driven lesson completion checklist
 

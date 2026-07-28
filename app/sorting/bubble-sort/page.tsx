@@ -5,6 +5,7 @@ import { LessonFooter } from "../../../components/lesson/LessonFooter";
 import { LessonFoundations } from "../../../components/lesson/LessonFoundations";
 import { LessonHeader } from "../../../components/lesson/LessonHeader";
 import { LessonMistakes } from "../../../components/lesson/LessonMistakes";
+import { LessonNavigation } from "../../../components/lesson/LessonNavigation";
 import { LessonQuiz } from "../../../components/lesson/LessonQuiz";
 import { bubbleSortLesson } from "../../../lib/lessons/bubble-sort";
 
@@ -567,6 +568,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <LessonNavigation currentSlug={bubbleSortLesson.slug} />
 
       <LessonFooter lessonNumber={bubbleSortLesson.lessonNumber} track={bubbleSortLesson.track} />
     </main>
