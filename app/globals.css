@@ -484,6 +484,41 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .heap-game-actions button small { display: block; margin-top: 4px; color: var(--ink-soft); font: 500 8px var(--font-mono); text-transform: uppercase; }
 .heap-game-actions button:hover { background: var(--lime); }
 .heap-game-actions button.is-wrong { border: 2px solid var(--red); background: #f7e8e3; color: var(--red); }
+.counting-stage { padding-bottom: 24px; }
+.counting-workspace { display: grid; gap: 14px; padding: 24px 6%; }
+.counting-panel { border: 1px solid #d1d9d2; background: #f7f9f5; }
+.counting-panel header { display: flex; justify-content: space-between; gap: 15px; padding: 10px 13px; border-bottom: 1px solid #d8ded8; color: #526159; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
+.counting-panel header small { color: #89948d; }
+.counting-source-row, .counting-output-row { min-height: 78px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; padding: 14px; }
+.counting-source-row > span, .counting-output-row > span { width: 48px; height: 52px; display: grid; place-items: center; position: relative; border: 1px solid #bdc8bf; background: white; font: 600 12px var(--font-mono); transition: transform .2s ease, background .2s ease; }
+.counting-source-row > span small, .counting-output-row > span small { position: absolute; bottom: 3px; color: #929c95; font: 500 7px var(--font-mono); }
+.counting-source-row > span.is-active { background: #b7cef4; border-color: #6f91c5; transform: translateY(-4px); }
+.counting-buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(62px, 1fr)); gap: 7px; padding: 14px; overflow-x: auto; }
+.counting-buckets > div { min-height: 75px; display: grid; place-items: center; padding: 8px 4px; border: 1px solid #c4cec6; background: white; transition: transform .2s ease, background .2s ease; }
+.counting-buckets > div small, .counting-buckets > div i { color: #718078; font: 500 7px var(--font-mono); text-transform: uppercase; font-style: normal; }
+.counting-buckets > div strong { font: 650 20px var(--font-mono); }
+.counting-buckets > div.is-active { background: var(--lime); border-color: #9fb344; transform: translateY(-3px); box-shadow: 3px 4px 0 rgba(23,37,31,.09); }
+.counting-panel.output-panel { background: #eef7f1; border-color: #a8cfba; }
+.counting-output-row > span { border-style: dashed; color: #98a29b; }
+.counting-output-row > span.is-filled { border-style: solid; background: var(--mint); border-color: #68b28e; color: var(--green); }
+.counting-output-row > span.is-active { border-style: solid; background: #efb06e; border-color: #c47733; color: #603816; transform: translateY(-4px); }
+.counting-range { display: flex; justify-content: center; gap: 26px; margin: 0 0 18px; color: #65736b; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.legend-count-source { background: #b7cef4; }
+.legend-count-bucket { background: var(--lime); }
+.counting-game { overflow: hidden; }
+.counting-game-source { padding: 23px 24px 15px; }
+.counting-game-source > small { display: block; margin-bottom: 11px; color: #6f7b74; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
+.counting-game-source > div { min-height: 58px; display: flex; flex-wrap: wrap; gap: 7px; }
+.counting-game-source span { width: 48px; height: 52px; display: grid; place-items: center; border: 1px solid #bdc8bf; background: white; font: 600 13px var(--font-mono); }
+.counting-game-source span.is-active { background: #b7cef4; border-color: #6f91c5; transform: translateY(-4px); }
+.counting-game-source span.is-used { opacity: .35; text-decoration: line-through; }
+.counting-game-buckets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; padding: 8px 24px 24px; }
+.counting-game-buckets button { min-height: 78px; display: grid; place-items: center; border: 1px solid #aab6ad; background: #f7f9f4; color: var(--ink); }
+.counting-game-buckets button:hover:not(:disabled) { background: var(--lime); }
+.counting-game-buckets button small { color: #6e7b73; font: 500 8px var(--font-mono); text-transform: uppercase; }
+.counting-game-buckets button strong { font: 650 21px var(--font-mono); }
+.counting-game-buckets button.is-wrong { border: 2px solid var(--red); background: #f7e8e3; color: var(--red); }
+.counting-game-buckets button:disabled { cursor: default; }
 .package span { font: 500 19px var(--font-mono); }
 .package i { font-style: normal; opacity: .45; }
 .belt { height: 33px; background: #314039; display: flex; align-items: center; justify-content: space-around; padding: 0 25px; }
@@ -634,6 +669,11 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .heap-node strong { font-size: 11px; }
   .heap-array-label, .heap-range { align-items: flex-start; flex-direction: column; gap: 5px; }
   .heap-range { margin-left: 8%; }
+  .counting-workspace { padding-left: 10px; padding-right: 10px; }
+  .counting-panel header, .counting-range { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .counting-range { margin-left: 5%; }
+  .counting-buckets { grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)); }
+  .counting-game-buckets { grid-template-columns: repeat(2, 1fr); }
   .code-window { margin-right: 8px; }
   .quiz-question { padding: 20px 17px; }
   .conveyor { gap: 3px; padding-left: 8px; padding-right: 8px; }

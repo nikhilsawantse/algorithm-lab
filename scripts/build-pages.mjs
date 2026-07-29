@@ -7,7 +7,7 @@ const clientDirectory = path.join(root, "dist", "client");
 const pagesDirectory = path.join(root, "dist-pages");
 const siteBase = "/algorithm-lab";
 const siteOrigin = "https://nikhilsawantse.github.io";
-const routes = ["/", "/sorting/bubble-sort", "/sorting/selection-sort", "/sorting/insertion-sort", "/sorting/merge-sort", "/sorting/quick-sort", "/sorting/heap-sort", "/glossary"];
+const routes = ["/", "/sorting/bubble-sort", "/sorting/selection-sort", "/sorting/insertion-sort", "/sorting/merge-sort", "/sorting/quick-sort", "/sorting/heap-sort", "/sorting/counting-sort", "/glossary"];
 
 await rm(pagesDirectory, { recursive: true, force: true });
 await mkdir(pagesDirectory, { recursive: true });

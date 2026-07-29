@@ -1,4 +1,5 @@
 import { bubbleSortLesson } from "./lessons/bubble-sort";
+import { countingSortLesson } from "./lessons/counting-sort";
 import { heapSortLesson } from "./lessons/heap-sort";
 import { insertionSortLesson } from "./lessons/insertion-sort";
 import { mergeSortLesson } from "./lessons/merge-sort";
@@ -100,7 +101,17 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: heapSortLesson.complexity.average.value,
   },
-  { name: "Counting Sort", slug: "counting-sort", category: "sorting", difficulty: "Intermediate", description: "Count bounded integer values instead of comparing pairs.", status: "planned", languages: supportedLanguages },
+  {
+    name: countingSortLesson.name,
+    slug: countingSortLesson.slug,
+    category: countingSortLesson.category,
+    difficulty: countingSortLesson.difficulty,
+    description: countingSortLesson.description,
+    status: "complete",
+    href: "/sorting/counting-sort",
+    languages: supportedLanguages,
+    complexity: countingSortLesson.complexity.average.value,
+  },
   { name: "Radix Sort", slug: "radix-sort", category: "sorting", difficulty: "Intermediate", description: "Order values one digit position at a time.", status: "planned", languages: supportedLanguages },
   { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
   { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: supportedLanguages },

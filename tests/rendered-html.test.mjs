@@ -29,6 +29,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Merge Sort/);
   assert.match(html, /Quick Sort/);
   assert.match(html, /Heap Sort/);
+  assert.match(html, /Counting Sort/);
   assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
@@ -193,6 +194,36 @@ test("server-renders the complete Heap Sort lesson", async () => {
   assert.match(html, /Repair the max heap/);
   assert.match(html, /Quick Sort/);
   assert.match(html, /Counting Sort/);
+  assert.match(html, /sorting\/counting-sort/);
+  assert.match(html, /Finish this lesson with confidence/);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+});
+
+test("server-renders the complete Counting Sort lesson", async () => {
+  const response = await render("/sorting/counting-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Count each key/);
+  assert.match(html, /Watch frequencies become positions/);
+  assert.match(html, /Classic frequencies/);
+  assert.match(html, /Dense small keys/);
+  assert.match(html, /Negative values/);
+  assert.match(html, /Sparse key range/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
+  assert.match(html, /Key range k/);
+  assert.match(html, /Frequency buckets/);
+  assert.match(html, /Stable output/);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Value \/ bucket/);
+  assert.match(html, /Placements/);
+  assert.match(html, /Complexity at a glance/);
+  assert.match(html, /Stability proof/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
+  assert.match(html, /Build the frequency table/);
+  assert.match(html, /Heap Sort/);
+  assert.match(html, /Radix Sort/);
   assert.match(html, /Coming next/);
   assert.match(html, /Finish this lesson with confidence/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);

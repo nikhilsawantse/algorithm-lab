@@ -14,6 +14,7 @@ There are no accounts, paid tiers, or locked lessons. The goal is to make high-q
 | Sorting | [Merge Sort](./app/sorting/merge-sort/page.tsx) | Intermediate | Yes | Yes | Yes | Yes | Yes | Yes |
 | Sorting | [Quick Sort](./app/sorting/quick-sort/page.tsx) | Intermediate | Yes | Yes | Yes | Yes | Yes | Yes |
 | Sorting | [Heap Sort](./app/sorting/heap-sort/page.tsx) | Intermediate | Yes | Yes | Yes | Yes | Yes | Yes |
+| Sorting | [Counting Sort](./app/sorting/counting-sort/page.tsx) | Intermediate | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ## Learning method
 
