@@ -4,6 +4,7 @@ import { heapSortLesson } from "./lessons/heap-sort";
 import { insertionSortLesson } from "./lessons/insertion-sort";
 import { mergeSortLesson } from "./lessons/merge-sort";
 import { quickSortLesson } from "./lessons/quick-sort";
+import { radixSortLesson } from "./lessons/radix-sort";
 import { selectionSortLesson } from "./lessons/selection-sort";
 import { supportedLanguages } from "./lesson-schema";
 import type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
@@ -112,7 +113,17 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: countingSortLesson.complexity.average.value,
   },
-  { name: "Radix Sort", slug: "radix-sort", category: "sorting", difficulty: "Intermediate", description: "Order values one digit position at a time.", status: "planned", languages: supportedLanguages },
+  {
+    name: radixSortLesson.name,
+    slug: radixSortLesson.slug,
+    category: radixSortLesson.category,
+    difficulty: radixSortLesson.difficulty,
+    description: radixSortLesson.description,
+    status: "complete",
+    href: "/sorting/radix-sort",
+    languages: supportedLanguages,
+    complexity: radixSortLesson.complexity.average.value,
+  },
   { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
   { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: supportedLanguages },
   { name: "Dijkstra's algorithm", slug: "dijkstra", category: "graphs", difficulty: "Intermediate", description: "Find shortest paths through weighted graphs.", status: "planned", languages: supportedLanguages },

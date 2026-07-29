@@ -30,6 +30,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Quick Sort/);
   assert.match(html, /Heap Sort/);
   assert.match(html, /Counting Sort/);
+  assert.match(html, /Radix Sort/);
   assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
@@ -224,7 +225,36 @@ test("server-renders the complete Counting Sort lesson", async () => {
   assert.match(html, /Build the frequency table/);
   assert.match(html, /Heap Sort/);
   assert.match(html, /Radix Sort/);
-  assert.match(html, /Coming next/);
+  assert.match(html, /sorting\/radix-sort/);
+  assert.match(html, /Finish this lesson with confidence/);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+});
+
+test("server-renders the complete Radix Sort lesson", async () => {
+  const response = await render("/sorting/radix-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Sort one digit/);
+  assert.match(html, /Watch stable digit passes build the order/);
+  assert.match(html, /Classic digit passes/);
+  assert.match(html, /Leading zeros/);
+  assert.match(html, /Duplicate keys/);
+  assert.match(html, /Signed integers/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
+  assert.match(html, /Digit place/);
+  assert.match(html, /Digit buckets 0–9/);
+  assert.match(html, /Collected order/);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Value \/ digit bucket/);
+  assert.match(html, /Digit reads/);
+  assert.match(html, /Complexity at a glance/);
+  assert.match(html, /Stability proof/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
+  assert.match(html, /Route the tens digit/);
+  assert.match(html, /Counting Sort/);
+  assert.match(html, /Track complete/);
   assert.match(html, /Finish this lesson with confidence/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
 });

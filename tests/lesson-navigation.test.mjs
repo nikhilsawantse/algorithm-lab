@@ -64,7 +64,13 @@ test("lesson navigation follows curriculum order and respects planned lessons", 
     assert.equal(countingNavigation.previous.name, "Heap Sort");
     assert.equal(countingNavigation.previous.href, "/sorting/heap-sort");
     assert.equal(countingNavigation.next.name, "Radix Sort");
-    assert.equal(countingNavigation.next.status, "planned");
+    assert.equal(countingNavigation.next.status, "complete");
+    assert.equal(countingNavigation.next.href, "/sorting/radix-sort");
+
+    const radixNavigation = registry.lessonNavigationFor("radix-sort");
+    assert.equal(radixNavigation.previous.name, "Counting Sort");
+    assert.equal(radixNavigation.previous.href, "/sorting/counting-sort");
+    assert.equal(radixNavigation.next, null);
     assert.equal(registry.lessonNavigationFor("missing-lesson"), null);
   } finally {
     await server.close();

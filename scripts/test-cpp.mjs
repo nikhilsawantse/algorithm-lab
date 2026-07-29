@@ -14,6 +14,7 @@ const suites = [
   { directory: "quick-sort", source: "quick_sort.cpp", test: "test_quick_sort.cpp", executable: "quick-sort-tests" },
   { directory: "heap-sort", source: "heap_sort.cpp", test: "test_heap_sort.cpp", executable: "heap-sort-tests" },
   { directory: "counting-sort", source: "counting_sort.cpp", test: "test_counting_sort.cpp", executable: "counting-sort-tests" },
+  { directory: "radix-sort", source: "radix_sort.cpp", test: "test_radix_sort.cpp", executable: "radix-sort-tests" },
 ];
 
 function run(command, arguments_) {

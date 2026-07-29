@@ -24,7 +24,7 @@ The roadmap favors a strong learning sequence over a large but shallow list of p
 - [x] Quick Sort
 - [x] Heap Sort
 - [x] Counting Sort
-- [ ] Radix Sort
+- [x] Radix Sort
 - [ ] Side-by-side sorting comparison
 
 ## Track 2 — Searching and recursion

@@ -12,6 +12,7 @@ const tests = [
   path.join(root, "algorithms", "sorting", "quick-sort", "test_quick_sort.py"),
   path.join(root, "algorithms", "sorting", "heap-sort", "test_heap_sort.py"),
   path.join(root, "algorithms", "sorting", "counting-sort", "test_counting_sort.py"),
+  path.join(root, "algorithms", "sorting", "radix-sort", "test_radix_sort.py"),
 ];
 
 for (const test of tests) {
