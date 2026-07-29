@@ -11,6 +11,7 @@ const suites = [
   { directory: "selection-sort", source: "SelectionSort.java", test: "SelectionSortTest.java", className: "SelectionSortTest" },
   { directory: "insertion-sort", source: "InsertionSort.java", test: "InsertionSortTest.java", className: "InsertionSortTest" },
   { directory: "merge-sort", source: "MergeSort.java", test: "MergeSortTest.java", className: "MergeSortTest" },
+  { directory: "quick-sort", source: "QuickSort.java", test: "QuickSortTest.java", className: "QuickSortTest" },
 ];
 
 function run(command, arguments_) {

@@ -1,6 +1,7 @@
 import { bubbleSortLesson } from "./lessons/bubble-sort";
 import { insertionSortLesson } from "./lessons/insertion-sort";
 import { mergeSortLesson } from "./lessons/merge-sort";
+import { quickSortLesson } from "./lessons/quick-sort";
 import { selectionSortLesson } from "./lessons/selection-sort";
 import { supportedLanguages } from "./lesson-schema";
 import type { AlgorithmDifficulty, SupportedLanguage } from "./lesson-schema";
@@ -76,7 +77,20 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: mergeSortLesson.complexity.average.value,
   },
-  { name: "Quick Sort", slug: "quick-sort", category: "sorting", difficulty: "Intermediate", description: "Partition values around a pivot.", status: "planned", languages: supportedLanguages },
+  {
+    name: quickSortLesson.name,
+    slug: quickSortLesson.slug,
+    category: quickSortLesson.category,
+    difficulty: quickSortLesson.difficulty,
+    description: quickSortLesson.description,
+    status: "complete",
+    href: "/sorting/quick-sort",
+    languages: supportedLanguages,
+    complexity: quickSortLesson.complexity.average.value,
+  },
+  { name: "Heap Sort", slug: "heap-sort", category: "sorting", difficulty: "Intermediate", description: "Build a heap and repeatedly extract its largest value.", status: "planned", languages: supportedLanguages },
+  { name: "Counting Sort", slug: "counting-sort", category: "sorting", difficulty: "Intermediate", description: "Count bounded integer values instead of comparing pairs.", status: "planned", languages: supportedLanguages },
+  { name: "Radix Sort", slug: "radix-sort", category: "sorting", difficulty: "Intermediate", description: "Order values one digit position at a time.", status: "planned", languages: supportedLanguages },
   { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
   { name: "Breadth-first search", slug: "breadth-first-search", category: "graphs", difficulty: "Intermediate", description: "Explore a graph level by level.", status: "planned", languages: supportedLanguages },
   { name: "Dijkstra's algorithm", slug: "dijkstra", category: "graphs", difficulty: "Intermediate", description: "Find shortest paths through weighted graphs.", status: "planned", languages: supportedLanguages },

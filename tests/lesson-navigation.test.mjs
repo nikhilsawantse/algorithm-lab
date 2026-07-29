@@ -43,7 +43,14 @@ test("lesson navigation follows curriculum order and respects planned lessons", 
     assert.equal(mergeNavigation.previous.name, "Insertion Sort");
     assert.equal(mergeNavigation.previous.href, "/sorting/insertion-sort");
     assert.equal(mergeNavigation.next.name, "Quick Sort");
-    assert.equal(mergeNavigation.next.status, "planned");
+    assert.equal(mergeNavigation.next.status, "complete");
+    assert.equal(mergeNavigation.next.href, "/sorting/quick-sort");
+
+    const quickNavigation = registry.lessonNavigationFor("quick-sort");
+    assert.equal(quickNavigation.previous.name, "Merge Sort");
+    assert.equal(quickNavigation.previous.href, "/sorting/merge-sort");
+    assert.equal(quickNavigation.next.name, "Heap Sort");
+    assert.equal(quickNavigation.next.status, "planned");
     assert.equal(registry.lessonNavigationFor("missing-lesson"), null);
   } finally {
     await server.close();

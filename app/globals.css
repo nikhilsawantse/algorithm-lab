@@ -433,6 +433,28 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .empty-queue { color: #929c95; font: 400 9px var(--font-mono); }
 .merge-challenge-output { padding: 0 24px 24px; }
 .merge-challenge-output > div { min-height: 48px; display: flex; flex-wrap: wrap; gap: 5px; padding: 7px; border: 1px dashed #8daa99; background: #edf7f1; }
+.bar-column.pivot .bar { background: #efb06e; border-color: #c47733; transform: translateY(-7px); }
+.bar-column.partition-left .bar { background: #bfe6d2; border-color: #68b28e; }
+.bar-column.inactive { opacity: .28; }
+.legend-pivot { background: #efb06e; }
+.partition-range { display: flex; justify-content: center; gap: 26px; margin: -4px 0 18px; color: #65736b; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.partition-game { overflow: hidden; }
+.partition-source { min-height: 100px; display: flex; align-items: center; justify-content: center; gap: 11px; padding: 22px; }
+.partition-source small { color: #748079; font: 500 8px var(--font-mono); text-transform: uppercase; }
+.partition-source > span { width: 56px; height: 68px; display: grid; place-items: center; background: #efb06e; border: 1px solid #c47733; color: #603816; font: 500 19px var(--font-mono); }
+.partition-source > span.is-scan { background: var(--lime); border-color: #9fb344; color: var(--ink); }
+.partition-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 24px 22px; }
+.partition-actions button { min-height: 58px; border: 1px solid #aab6ad; background: #f5f7f2; color: var(--ink); font-weight: 750; }
+.partition-actions button small { display: block; margin-top: 4px; color: var(--ink-soft); font: 500 8px var(--font-mono); }
+.partition-actions button:hover { background: var(--lime); }
+.partition-actions button.is-wrong { border: 2px solid var(--red); background: #f7e8e3; color: var(--red); }
+.partition-bins { display: grid; grid-template-columns: 1fr .55fr 1fr; gap: 8px; padding: 0 24px 24px; }
+.partition-bins article { min-height: 86px; padding: 10px; border: 1px solid #d1d8d1; background: #f7f8f4; }
+.partition-bins article > small { display: block; margin-bottom: 9px; color: #748079; font: 500 8px var(--font-mono); text-transform: uppercase; }
+.partition-bins article > div { display: flex; flex-wrap: wrap; gap: 4px; }
+.partition-bins article > div > span { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #b7c4ba; background: #dff3e7; font: 500 10px var(--font-mono); }
+.partition-bins article.pivot-bin { background: #f8eee4; border-color: #d6a471; }
+.partition-bins article.pivot-bin > div > span { background: #efb06e; border-color: #c47733; }
 .package span { font: 500 19px var(--font-mono); }
 .package i { font-style: normal; opacity: .45; }
 .belt { height: 33px; background: #314039; display: flex; align-items: center; justify-content: space-around; padding: 0 25px; }
