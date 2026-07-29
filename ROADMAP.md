@@ -22,7 +22,7 @@ The roadmap favors a strong learning sequence over a large but shallow list of p
 - [x] Insertion Sort
 - [x] Merge Sort
 - [x] Quick Sort
-- [ ] Heap Sort
+- [x] Heap Sort
 - [ ] Counting Sort
 - [ ] Radix Sort
 - [ ] Side-by-side sorting comparison

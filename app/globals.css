@@ -455,6 +455,35 @@ pre { margin: 0; padding: 24px 0 27px; overflow-x: auto; font: 400 11px/1.85 var
 .partition-bins article > div > span { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #b7c4ba; background: #dff3e7; font: 500 10px var(--font-mono); }
 .partition-bins article.pivot-bin { background: #f8eee4; border-color: #d6a471; }
 .partition-bins article.pivot-bin > div > span { background: #efb06e; border-color: #c47733; }
+.heap-visual-stage { padding-bottom: 24px; }
+.heap-tree { min-height: 250px; display: grid; align-content: center; gap: 12px; padding: 24px 6%; border-bottom: 1px solid #d8ded7; background: linear-gradient(180deg, #f9faf6, #f1f5ef); }
+.heap-tree-level { display: flex; justify-content: space-around; gap: 10px; }
+.heap-node { width: 64px; min-height: 52px; display: grid; place-items: center; padding: 7px 5px; border: 1px solid #bdc8bf; background: white; box-shadow: 3px 4px 0 rgba(23,37,31,.07); transition: transform .2s ease, background .2s ease; }
+.heap-node strong { font: 600 14px var(--font-mono); }
+.heap-node small { color: #7b8780; font: 500 7px var(--font-mono); text-transform: uppercase; }
+.heap-node.is-root { background: #b7cef4; border-color: #6f91c5; transform: translateY(-3px); }
+.heap-node.is-child { background: #edf1e8; border-color: #a7b2a9; }
+.heap-node.is-candidate { background: var(--lime); border-color: #9fb344; transform: translateY(-3px); }
+.heap-node.is-swapped { background: #efb06e; border-color: #c47733; transform: translateY(-3px); }
+.heap-node.is-sorted { background: var(--mint); border-color: #50b98e; opacity: .68; }
+.heap-array-label { display: flex; justify-content: space-between; gap: 15px; margin: 23px 8% 0; color: #66736c; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
+.heap-array-label small { color: #8b968f; }
+.heap-bars { height: 220px; padding-top: 24px; }
+.bar-column.heap-root .bar { background: #b7cef4; border-color: #6f91c5; transform: translateY(-6px); }
+.bar-column.heap-child .bar { background: #dfe5d9; border-color: #9aa69c; }
+.bar-column.heap-candidate .bar { background: var(--lime); border-color: #9fb344; transform: translateY(-6px); }
+.legend-heap-root { background: #b7cef4; }
+.legend-heap-candidate { background: var(--lime); }
+.heap-range { display: flex; justify-content: center; gap: 26px; margin: -4px 0 18px; color: #65736b; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.heap-game { overflow: hidden; }
+.heap-game-tree { display: grid; gap: 11px; min-height: 235px; align-content: center; padding: 25px 7%; background: #f7f9f4; border-bottom: 1px solid #d4dbd4; }
+.heap-game-actions { padding: 18px 24px 23px; }
+.heap-game-actions > small { display: block; margin-bottom: 11px; color: #6e7b73; font: 500 8px var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
+.heap-game-actions > div { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.heap-game-actions button { min-height: 58px; border: 1px solid #aab6ad; background: white; color: var(--ink); font: 700 16px var(--font-mono); }
+.heap-game-actions button small { display: block; margin-top: 4px; color: var(--ink-soft); font: 500 8px var(--font-mono); text-transform: uppercase; }
+.heap-game-actions button:hover { background: var(--lime); }
+.heap-game-actions button.is-wrong { border: 2px solid var(--red); background: #f7e8e3; color: var(--red); }
 .package span { font: 500 19px var(--font-mono); }
 .package i { font-style: normal; opacity: .45; }
 .belt { height: 33px; background: #314039; display: flex; align-items: center; justify-content: space-around; padding: 0 25px; }
@@ -600,6 +629,11 @@ footer a { font-size: 11px; border-bottom: 1px solid #728b7f; padding-bottom: 3p
   .trace-heading { align-items: flex-start; flex-direction: column; }
   .merge-workspace { grid-template-columns: 1fr; }
   .merge-queues { grid-template-columns: 1fr; }
+  .heap-tree { min-height: 220px; padding-left: 2%; padding-right: 2%; }
+  .heap-node { width: 47px; min-height: 45px; }
+  .heap-node strong { font-size: 11px; }
+  .heap-array-label, .heap-range { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .heap-range { margin-left: 8%; }
   .code-window { margin-right: 8px; }
   .quiz-question { padding: 20px 17px; }
   .conveyor { gap: 3px; padding-left: 8px; padding-right: 8px; }

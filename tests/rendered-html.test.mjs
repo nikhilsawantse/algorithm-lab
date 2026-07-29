@@ -28,6 +28,7 @@ test("server-renders the Algorithm Lab catalog", async () => {
   assert.match(html, /Insertion Sort/);
   assert.match(html, /Merge Sort/);
   assert.match(html, /Quick Sort/);
+  assert.match(html, /Heap Sort/);
   assert.doesNotMatch(html, /Your site is taking shape/);
 });
 
@@ -163,6 +164,35 @@ test("server-renders the complete Quick Sort lesson", async () => {
   assert.match(html, /Build a pivot partition/);
   assert.match(html, /Merge Sort/);
   assert.match(html, /Heap Sort/);
+  assert.match(html, /sorting\/heap-sort/);
+  assert.match(html, /Finish this lesson with confidence/);
+  assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);
+});
+
+test("server-renders the complete Heap Sort lesson", async () => {
+  const response = await render("/sorting/heap-sort");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Build a max heap/);
+  assert.match(html, /Watch the heap grow, shrink, and repair/);
+  assert.match(html, /Classic heap build/);
+  assert.match(html, /Already a max heap/);
+  assert.match(html, /Ascending input/);
+  assert.match(html, /Duplicate values/);
+  assert.match(html, /JavaScript.*Python.*Java.*C\+\+/s);
+  assert.match(html, /Heap size/);
+  assert.match(html, /Same data in array storage/);
+  assert.match(html, /Dry-run trace/);
+  assert.match(html, /Parent \/ children/);
+  assert.match(html, /Extractions/);
+  assert.match(html, /Complexity at a glance/);
+  assert.match(html, /Instability example/);
+  assert.match(html, /Common mistakes/);
+  assert.match(html, /Check your understanding/);
+  assert.match(html, /Repair the max heap/);
+  assert.match(html, /Quick Sort/);
+  assert.match(html, /Counting Sort/);
   assert.match(html, /Coming next/);
   assert.match(html, /Finish this lesson with confidence/);
   assert.doesNotMatch(html, /Your site is taking shape|\u00e2|\u00c2|\u00c3|\ufffd/u);

@@ -12,6 +12,7 @@ const suites = [
   { directory: "insertion-sort", source: "insertion_sort.cpp", test: "test_insertion_sort.cpp", executable: "insertion-sort-tests" },
   { directory: "merge-sort", source: "merge_sort.cpp", test: "test_merge_sort.cpp", executable: "merge-sort-tests" },
   { directory: "quick-sort", source: "quick_sort.cpp", test: "test_quick_sort.cpp", executable: "quick-sort-tests" },
+  { directory: "heap-sort", source: "heap_sort.cpp", test: "test_heap_sort.cpp", executable: "heap-sort-tests" },
 ];
 
 function run(command, arguments_) {

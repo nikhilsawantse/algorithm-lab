@@ -1,4 +1,5 @@
 import { bubbleSortLesson } from "./lessons/bubble-sort";
+import { heapSortLesson } from "./lessons/heap-sort";
 import { insertionSortLesson } from "./lessons/insertion-sort";
 import { mergeSortLesson } from "./lessons/merge-sort";
 import { quickSortLesson } from "./lessons/quick-sort";
@@ -88,7 +89,17 @@ export const algorithms: AlgorithmLesson[] = [
     languages: supportedLanguages,
     complexity: quickSortLesson.complexity.average.value,
   },
-  { name: "Heap Sort", slug: "heap-sort", category: "sorting", difficulty: "Intermediate", description: "Build a heap and repeatedly extract its largest value.", status: "planned", languages: supportedLanguages },
+  {
+    name: heapSortLesson.name,
+    slug: heapSortLesson.slug,
+    category: heapSortLesson.category,
+    difficulty: heapSortLesson.difficulty,
+    description: heapSortLesson.description,
+    status: "complete",
+    href: "/sorting/heap-sort",
+    languages: supportedLanguages,
+    complexity: heapSortLesson.complexity.average.value,
+  },
   { name: "Counting Sort", slug: "counting-sort", category: "sorting", difficulty: "Intermediate", description: "Count bounded integer values instead of comparing pairs.", status: "planned", languages: supportedLanguages },
   { name: "Radix Sort", slug: "radix-sort", category: "sorting", difficulty: "Intermediate", description: "Order values one digit position at a time.", status: "planned", languages: supportedLanguages },
   { name: "Binary Search", slug: "binary-search", category: "searching", difficulty: "Beginner", description: "Halve a sorted search space with every decision.", status: "planned", languages: supportedLanguages },
